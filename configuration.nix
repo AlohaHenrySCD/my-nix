@@ -36,7 +36,11 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.extraConfig = {
+      device.routes = true;
+    };
   };
+  services.blueman.enable = true;
 
   services.logind.settings.Login = {
     HandleLidSwitch = "suspend";
@@ -171,6 +175,10 @@
   };
 
   hardware.graphics.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
   hardware.asahi = {
     enable = true;
     peripheralFirmwareDirectory = /boot/vendorfw;
@@ -211,31 +219,18 @@
   # };
 
   environment.systemPackages = with pkgs; [
-    btop
-    lazygit
-    kdePackages.kate
     papers
-    kitty
-    helix
-    starship
-    # go-musicfox
     alacritty
     fuzzel
     home-manager
     chromium
     asahi-bless
     git
-    pulseaudio
-    # tldr
     tlrc
     navi
     pavucontrol
     fzf
     i3bar-river
-    # notesnook
-    # obsidian
-    # anytype
-    # amplenote
 
     # programing
     rustc
@@ -243,7 +238,6 @@
     rustfmt
     clippy
     rust-analyzer
-    # omniSharp
     clang
     clang-tools
     bash-language-server
@@ -259,15 +253,6 @@
     nil
     ty
     taplo
-    # ironbar
-    # upower
-    # fcft
-    # pactl
-    # nmcli
-    # blueman-manager
-    # peaclock
-    # playerctl
-    # swaync
   ];
 
   environment.sessionVariables = lib.mkForce {

@@ -1,6 +1,13 @@
 { lib, pkgs, ... }:
 {
   home.packages = with pkgs; [
+    hmcl
+    btop
+    lazygit
+    kdePackages.kate
+    helix
+    kitty
+    starship
   ];
   home.stateVersion = "26.05";
   home.enableNixpkgsReleaseCheck = false;
