@@ -175,6 +175,7 @@
   };
 
   hardware.graphics.enable = true;
+  hardware.opengl.enable = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -244,7 +245,11 @@
     lazygit
 
     # gaming
-    hmcl
+    # hmcl
+    jdk8
+    jdk25
+    glfw
+    prismlauncher
 
     # develop env(lsp)
     rustc
