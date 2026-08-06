@@ -248,7 +248,7 @@
     # hmcl
     jdk8
     jdk25
-    glfw
+    # glfw
     prismlauncher
 
     # develop env(lsp)
