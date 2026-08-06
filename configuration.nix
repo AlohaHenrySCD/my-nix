@@ -219,9 +219,7 @@
   # };
 
   environment.systemPackages = with pkgs; [
-    papers
-    alacritty
-    fuzzel
+    # base
     home-manager
     chromium
     asahi-bless
@@ -230,9 +228,25 @@
     navi
     pavucontrol
     fzf
-    i3bar-river
+    helix
+    alacritty
+    fuzzel
+    kitty
 
-    # programing
+    # gui
+    kdePackages.kate
+    papers
+
+    # custom
+    i3bar-river
+    starship
+    btop
+    lazygit
+
+    # gaming
+    hmcl
+
+    # develop env(lsp)
     rustc
     cargo
     rustfmt

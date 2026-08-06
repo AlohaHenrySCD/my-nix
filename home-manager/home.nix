@@ -1,13 +1,6 @@
 { lib, pkgs, ... }:
 {
   home.packages = with pkgs; [
-    hmcl
-    btop
-    lazygit
-    kdePackages.kate
-    helix
-    kitty
-    starship
   ];
   home.stateVersion = "26.05";
   home.enableNixpkgsReleaseCheck = false;
@@ -318,6 +311,11 @@
         indent-guides.skip-levels = 1;
       };
       keys.normal = {
+        w = "rotate_view";
+        C-j = "jump_view_left";
+        C-k = "jump_view_down";
+        C-l = "jump_view_up";
+        "C-;" = "jump_view_right";
         j = "move_char_left";
         k = "move_line_down";
         l = "move_line_up";
