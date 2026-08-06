@@ -1,4 +1,4 @@
-{ lib, pkgs, ...}:
+{ lib, pkgs, ... }:
 {
   home.packages = with pkgs; [
   ];
@@ -12,10 +12,10 @@
     SUDO_EDITOR = "hx";
   };
 
-  xdg.configFile."niri/config.kdl".source =  ./config.kdl;
-  home.file.".local/share/fcitx5/rime/default.custom.yaml".source =  ./default.custom.yaml;
+  xdg.configFile."niri/config.kdl".source = ./config.kdl;
+  home.file.".local/share/fcitx5/rime/default.custom.yaml".source = ./default.custom.yaml;
 
-  xdg.configFile."tlrc/config/toml".source =  ./tlrc.toml;
+  xdg.configFile."tlrc/config/toml".source = ./tlrc.toml;
 
   programs.obs-studio = {
     enable = true;
@@ -30,11 +30,11 @@
     };
   };
 
-  xdg.configFile."starship.toml".source =  ./starship.toml;
+  xdg.configFile."starship.toml".source = ./starship.toml;
   programs.starship = {
     enableFishIntegration = true;
   };
-  
+
   programs.starship.enable = true;
 
   programs.i3bar-river = {
@@ -229,7 +229,7 @@
 
   programs.bash = {
     enable = true;
-    
+
     # initExtra = ''
     #   # include .profile if it exists
     #   [[ -f ~/.profile]] && . ~/.profile
@@ -277,7 +277,8 @@
       remember_window_size = "yes";
     };
   };
-  
+
+  xdg.configFile."helix/languages.toml".source = ./helix-languages.toml;
   programs.helix = {
     enable = true;
     defaultEditor = true;
@@ -324,9 +325,7 @@
         ";" = "extend_char_right";
       };
 
-      
-      
     };
-    
+
   };
 }

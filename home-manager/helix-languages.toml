@@ -1,0 +1,16 @@
+[[language]]
+name = "nix"
+indent.tab-width = 4
+indent.unit = "\t"
+auto-format = true
+
+[[language]]
+name = "rust"
+indent.tab-width = 4
+indent.unit = "\t"
+auto-format = true
+
+[[language]]
+name = "toml"
+indent.tab-width = 4
+indent.unit = "\t"

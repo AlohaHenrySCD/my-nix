@@ -1,4 +1,10 @@
-{ config, lib, inputs, pkgs, ... }:
+{
+  config,
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   users.users.alohahenry = {
     isNormalUser = true;
@@ -81,7 +87,10 @@
     };
   };
 
-  fonts.packages = [pkgs.jetbrains-mono] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  fonts.packages = [
+    pkgs.jetbrains-mono
+  ]
+  ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   programs.niri.enable = true;
   services.greetd = {
@@ -108,7 +117,7 @@
     extraOpts = {
       # "ExtensionSettings" = {
       #   "bpoadfkcbjbfhfodiogcnhhhpibjhbnh" = {
-          
+
       #   }
       # };
       "RestoreOnStartup" = 1;
@@ -139,15 +148,17 @@
   security.sudo = {
     enable = true;
     wheelNeedsPassword = false;
-    extraRules = [{
-      commands = [
-        {
-          command = "${pkgs.systemd}/bin/reboot";
-          options = ["NOPASSWD"];
-        }
-      ];
-      groups = ["wheel"];
-    }];
+    extraRules = [
+      {
+        commands = [
+          {
+            command = "${pkgs.systemd}/bin/reboot";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+        groups = [ "wheel" ];
+      }
+    ];
   };
 
   boot = {
@@ -181,7 +192,7 @@
   time = {
     timeZone = "Asia/Shanghai";
   };
-  
+
   networking = {
     # hostName = "alohahenry";
     networkmanager.enable = true;
