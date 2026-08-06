@@ -215,7 +215,8 @@
     asahi-bless
     git
     pulseaudio
-    tldr
+    # tldr
+    tlrc
     navi
     pavucontrol
     fzf
