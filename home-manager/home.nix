@@ -78,22 +78,22 @@
           {
             block = "memory";
             format = "^icon_memory_mem $mem_used_percents";
-            interval = 5;
+            interval = 3;
           }
           {
             block = "cpu";
             format = "$icon $utilization";
-            interval = 5;
+            interval = 3;
           }
           {
             block = "battery";
-            format = "$icon $percentage";
+            format = "$icon $percentage $time";
             full_format = "$icon";
-            interval = 20;
+            interval = 5;
           }
           {
             block = "net";
-            format = "$icon $signal_strength";
+            format = "$icon ";
           }
           {
             block = "sound";
