@@ -30,6 +30,25 @@
     };
   };
 
+  programs.ssh = {
+    enable = true;
+
+    matchBlocks = {
+      blog = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519_blog";
+      };
+
+      my-nix = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519";
+      };
+    };
+
+  };
+
   xdg.configFile."starship.toml".source = ./starship.toml;
   programs.starship = {
     enableFishIntegration = true;

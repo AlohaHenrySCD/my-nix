@@ -84,7 +84,7 @@
         settings = {
           main = {
             capslock = "esc";
-            esc = "capslock";
+            esc = "C-space";
           };
         };
       };
@@ -175,7 +175,7 @@
   };
 
   hardware.graphics.enable = true;
-  hardware.opengl.enable = true;
+  # hardware.opengl.enable = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -233,6 +233,7 @@
     alacritty
     fuzzel
     kitty
+    hugo
 
     # gui
     kdePackages.kate
