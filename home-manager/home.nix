@@ -2,6 +2,8 @@
 {
   home.packages = with pkgs; [
     ansifilter
+    eza
+    ripgrep
   ];
   home.stateVersion = "26.05";
   home.enableNixpkgsReleaseCheck = false;

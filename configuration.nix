@@ -144,7 +144,22 @@
     ];
   };
 
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set -g fish_greeting ""
+    '';
+    shellAbbrs = {
+      ls = "eza";
+      la = "eza -a";
+      ll = "eza -al";
+      grep = "rg";
+      add = "nix shell nixpkgs#";
+    };
+    shellAliases = {
+      bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
+    };
+  };
   users.extraUsers.alohahenry = {
     shell = pkgs.fish;
   };
