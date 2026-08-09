@@ -166,6 +166,11 @@
   };
 
   boot = {
+    kernel.sysctl = {
+      "net.ipv6.conf.all.accept_ra" = 2;
+      "net.ipv6.conf.default.accept_ra" = 2;
+      "net.ipv6.conf.wlan0.accept_ra" = 2;
+    };
     kernelParams = [
       "appledrm.show_notch=1"
     ];
@@ -202,10 +207,34 @@
     timeZone = "Asia/Shanghai";
   };
 
+  # services.clatd.enable = true;
   networking = {
     # hostName = "alohahenry";
     networkmanager.enable = true;
     networkmanager.wifi.backend = "iwd";
+    # networkmanager.settings = {
+    #   main.ndisc = "external";
+    # };
+    # networkmanager.ensureProfiles.profiles = {
+    #   "wlan0" = {
+    #     connection = {
+    #       id = "wlan0";
+    #       type = "wifi";
+    #     };
+    #     ipv4 = {
+    #       method = "auto";
+    #     };
+    #     ipv6 = {
+    #       method = "auto";
+    #       # addr-gen-mode = "stable-privacy";
+    #       ndisc = "kernel";
+    #     };
+    #   };
+    # };
+    # networkmanager.dhcp = true;
+    enableIPv6 = true;
+    # useDHCP = true;
+    # dhcpcd.persistent = true;
     wireless.iwd = {
       enable = true;
       settings.General.EnableNetworkConfiguration = true;

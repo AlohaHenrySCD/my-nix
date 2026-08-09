@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 {
   home.packages = with pkgs; [
+    ansifilter
   ];
   home.stateVersion = "26.05";
   home.enableNixpkgsReleaseCheck = false;
@@ -294,6 +295,15 @@
       hide_window_decorations = "titlebar-only";
       window_padding_width = 10;
       remember_window_size = "yes";
+
+      # cursor = "none";
+      cursor_trail = 1;
+      cursor_trail_decay = "0.05 0.4";
+      cursor_trail_start_threshold = 0;
+      cursor_blink_interval = "0.5 ease-in-out";
+
+      scrollback_pager = "sh -c 'cat > /tmp/kitty-scrollback.txt && ansifilter -i /tmp/kitty-scrollback.txt -o /tmp/kitty-scrollback-filtered.txt && hx /tmp/kitty-scrollback-filtered.txt'";
+      "map alt+q" = "show_scrollback";
     };
   };
 
