@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 {
   home.packages = with pkgs; [
+    clash-verge-rev
     ansifilter
     eza
     ripgrep

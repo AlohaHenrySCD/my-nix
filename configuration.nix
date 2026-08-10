@@ -118,12 +118,10 @@
       "hfjbmagddngcpeloejdejnfgbamkjaeg" # vimium c
       "bkdgflcldnnnapblkhphbgpggdiikppg" # duck duck go
     ];
+    # override.commandLineArgs = [
+    #   "--extensions-on-chrome-urls --extensions-on-extension-urls"
+    # ];
     extraOpts = {
-      # "ExtensionSettings" = {
-      #   "bpoadfkcbjbfhfodiogcnhhhpibjhbnh" = {
-
-      #   }
-      # };
       "RestoreOnStartup" = 1;
       "BackgroundModeEnabled" = false;
     };
