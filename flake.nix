@@ -19,6 +19,7 @@
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # frpc.url = "https://nya.globalslb.net/natfrp/client/frpc/0.51.0-sakura-14/frpc_linux_arm64";
     # clash-verge-rev = {
     #   url = "github:clash-verge-rev/clash-verge-rev";
     # };
@@ -32,6 +33,7 @@
       home-manager,
       helix-plugins,
       hjem,
+      frpc,
       # clash-verge-rev,
       ...
     }@inputs:

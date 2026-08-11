@@ -14,6 +14,7 @@
       "input"
       "wheel"
       "networkmanager"
+      "openrazer"
     ];
     # shell = pkgs.fish;
   };
@@ -25,6 +26,7 @@
   hjem.users.alohahenry.enable = true;
   hjem.users.alohahenry.programs.helix = {
     enable = true;
+    package = pkgs.steelix;
     plugins = with pkgs.helixPlugins; [
       notify
       oil
@@ -127,6 +129,32 @@
   };
   systemd.user.services.niri.enableDefaultPath = false;
 
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set -g fish_greeting ""
+    '';
+    shellAbbrs = {
+      ls = "eza";
+      la = "eza -a";
+      ll = "eza -al";
+      cd = "z";
+      grep = "rg";
+      add = "nix shell nixpkgs#";
+    };
+    shellAliases = {
+      bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
+    };
+    # initExtra = lib.mkAfter ''
+    #     eval
+    #   ''
+  };
+
   programs.chromium = {
     enable = true;
     extensions = [
@@ -161,22 +189,6 @@
     ];
   };
 
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set -g fish_greeting ""
-    '';
-    shellAbbrs = {
-      ls = "eza";
-      la = "eza -a";
-      ll = "eza -al";
-      grep = "rg";
-      add = "nix shell nixpkgs#";
-    };
-    shellAliases = {
-      bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
-    };
-  };
   users.extraUsers.alohahenry = {
     shell = pkgs.fish;
   };
@@ -222,6 +234,8 @@
     peripheralFirmwareDirectory = /boot/vendorfw;
     setupAsahiSound = true;
   };
+
+  hardware.openrazer.enable = true;
 
   zramSwap = {
     enable = true;
@@ -290,8 +304,8 @@
     navi
     pavucontrol
     fzf
-    helix
-    # steelix
+    # helix
+    steelix
     alacritty
     fuzzel
     kitty
@@ -309,10 +323,14 @@
 
     # gaming
     # hmcl
+    # sbclPackages.frpc
+    frpc
     jdk8
     jdk25
     # glfw
     prismlauncher
+    openrazer-daemon
+    polychromatic
 
   ];
 
@@ -321,6 +339,7 @@
     LANG = "zh_CN.UTF-8";
     XMODIFIERS = "@im=fcitx";
     RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+    WAYLAND_DISPLAY = "wayland-1";
     DISPLAY = "wayland-1";
   };
 

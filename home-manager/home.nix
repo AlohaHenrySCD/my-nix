@@ -1,7 +1,7 @@
 {
   lib,
   pkgs,
-  inputs,
+  # inputs,
   ...
 }:
 {
@@ -13,6 +13,7 @@
     zoxide
 
     # develop env(lsp)
+
     rustc
     cargo
     rustfmt
@@ -341,6 +342,7 @@
   xdg.configFile."helix/languages.toml".source = ./helix-languages.toml;
   programs.helix = {
     enable = true;
+    package = pkgs.steelix;
     defaultEditor = true;
 
     settings = {
