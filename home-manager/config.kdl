@@ -44,7 +44,10 @@ input {
         // disabled-on-external-mouse
     }
 
-    mouse 
+    mouse {
+        accel-speed 0.5
+        accel-profile "flat"
+    }
 
 
     trackpoint 

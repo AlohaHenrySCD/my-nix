@@ -1,10 +1,38 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   home.packages = with pkgs; [
-    clash-verge-rev
+    # clash-verge-rev
     ansifilter
     eza
     ripgrep
+    zoxide
+
+    # develop env(lsp)
+    rustc
+    cargo
+    rustfmt
+    clippy
+    rust-analyzer
+    clang
+    clang-tools
+    bash-language-server
+    vscode-css-languageserver
+    yaml-language-server
+    fish-lsp
+    haskell-language-server
+    superhtml
+    typescript-language-server
+    vscode-json-languageserver
+    texlab
+    marksman
+    nil
+    ty
+    taplo
   ];
   home.stateVersion = "26.05";
   home.enableNixpkgsReleaseCheck = false;

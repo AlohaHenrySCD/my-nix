@@ -14,10 +14,27 @@
       url = "github:tpwrules/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    helix-plugins.url = "github:maxschipper/helix-plugins-nix";
+    hjem = {
+      url = "github:feel-co/hjem";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # clash-verge-rev = {
+    #   url = "github:clash-verge-rev/clash-verge-rev";
+    # };
   };
 
   outputs =
-    { self, nixpkgs, nirimod, home-manager, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      nirimod,
+      home-manager,
+      helix-plugins,
+      hjem,
+      # clash-verge-rev,
+      ...
+    }@inputs:
     let
       system = "aarch64-linux";
       pkgs = import nixpkgs { inherit system; };
@@ -40,6 +57,7 @@
         inherit system;
         specialArgs = { inherit inputs; };
         modules = [
+          hjem.nixosModules.default
           ./configuration.nix
           home-manager.nixosModules.default
           {
@@ -52,6 +70,10 @@
           }
         ];
       };
+
+      # packages.${system}.default = pkgs.stdenv.mkDerivation {
+      #   src = clash-verge-rev;
+      # }
 
       formatter.${system} = pkgs.nixfmt-rfc-style;
     };

@@ -19,6 +19,25 @@
   };
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.overlays = [ inputs.helix-plugins.overlays.default ];
+  hjem.extraModules = [ inputs.helix-plugins.hjemModules.default ];
+
+  hjem.users.alohahenry.enable = true;
+  hjem.users.alohahenry.programs.helix = {
+    enable = true;
+    plugins = with pkgs.helixPlugins; [
+      notify
+      oil
+      breadcrumbs
+      fake-warp
+      smooth-scroll
+      # forest
+      glyph
+      show-keys
+      # moka
+    ];
+  };
+
   # brightness controll
   hardware.brillo.enable = true;
 
@@ -272,6 +291,7 @@
     pavucontrol
     fzf
     helix
+    # steelix
     alacritty
     fuzzel
     kitty
@@ -294,27 +314,6 @@
     # glfw
     prismlauncher
 
-    # develop env(lsp)
-    rustc
-    cargo
-    rustfmt
-    clippy
-    rust-analyzer
-    clang
-    clang-tools
-    bash-language-server
-    vscode-css-languageserver
-    yaml-language-server
-    fish-lsp
-    haskell-language-server
-    superhtml
-    typescript-language-server
-    vscode-json-languageserver
-    texlab
-    marksman
-    nil
-    ty
-    taplo
   ];
 
   environment.sessionVariables = lib.mkForce {
