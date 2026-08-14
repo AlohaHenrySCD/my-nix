@@ -20,23 +20,44 @@
   };
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.overlays = [ inputs.helix-plugins.overlays.default ];
-  hjem.extraModules = [ inputs.helix-plugins.hjemModules.default ];
+  # nixpkgs.overlays = [ inputs.helix-plugins.overlays.default ];
+  # hjem.extraModules = [ inputs.helix-plugins.hjemModules.default ];
 
-  hjem.users.alohahenry.enable = true;
-  hjem.users.alohahenry.programs.helix = {
+  # hjem.users.alohahenry = {
+  #   enable = true;
+  #   user = "alohahenry";
+  #   directory = "/home/alohahenry";
+
+  # };
+  # hjem.users.alohahenry.programs.helix = {
+  #   package = pkgs.steelix;
+  #   enable = true;
+  #   plugins = with pkgs.helixPlugins; [
+  #     notify
+  #     oil
+  #     breadcrumbs
+  #     fake-warp
+  #     smooth-scroll
+  #     forest
+  #     glyph
+  #     show-keys
+  #     moka
+  #   ];
+  # };
+  nixpkgs.overlays = [ inputs.helix-plugins.overlays.default ];
+
+  programs.helix = {
     enable = true;
-    package = pkgs.steelix;
     plugins = with pkgs.helixPlugins; [
       notify
       oil
       breadcrumbs
       fake-warp
       smooth-scroll
-      # forest
+      forest
       glyph
       show-keys
-      # moka
+      moka
     ];
   };
 
@@ -48,7 +69,7 @@
   # services.desktopManager.plasma6.enable = true;
   imports = [
     inputs.nixos-apple-silicon.nixosModules.default
-    # Run `sudo nixos-generate-config --show-hardware-config | tee hardware-configuration.nix`
+    inputs.helix-plugins.nixosModules.default # Run `sudo nixos-generate-config --show-hardware-config | tee hardware-configuration.nix`
     # and uncomment this line.
     ./hardware-configuration.nix
   ];
@@ -105,7 +126,7 @@
         settings = {
           main = {
             capslock = "esc";
-            esc = "C-space";
+            esc = "f12";
           };
         };
       };
@@ -132,6 +153,14 @@
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
+  };
+
+  programs.dconf.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.deault = "*";
   };
 
   programs.fish = {
@@ -174,6 +203,11 @@
     };
   };
 
+  i18n.defaultLocale = "zh_CN.UTF-8";
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+    "zh_CN.UTF-8/UTF-8"
+  ];
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
@@ -231,6 +265,7 @@
   };
   hardware.asahi = {
     enable = true;
+    # useExperimentalGPUDriver = true;
     peripheralFirmwareDirectory = /boot/vendorfw;
     setupAsahiSound = true;
   };
@@ -296,7 +331,13 @@
 
   environment.systemPackages = with pkgs; [
     # base
+    # mesa
     home-manager
+    gtk4
+    gtk4.dev
+    # glib
+    adwaita-icon-theme
+    hicolor-icon-theme
     chromium
     asahi-bless
     git
@@ -306,6 +347,7 @@
     fzf
     # helix
     steelix
+    steel
     alacritty
     fuzzel
     kitty
@@ -324,7 +366,7 @@
     # gaming
     # hmcl
     # sbclPackages.frpc
-    frpc
+    # frpc
     jdk8
     jdk25
     # glfw
@@ -335,7 +377,9 @@
   ];
 
   environment.sessionVariables = lib.mkForce {
-    LC_MESSAGES = "zh-CN.UTF-8";
+    LC_MESSAGES = "zh_CN.UTF-8";
+    LC_ALL = "zh_CN.UTF-8";
+    LC_COLLATE = "zh_CN.UTF-8";
     LANG = "zh_CN.UTF-8";
     XMODIFIERS = "@im=fcitx";
     RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";

@@ -33,7 +33,7 @@
       home-manager,
       helix-plugins,
       hjem,
-      frpc,
+      # frpc,
       # clash-verge-rev,
       ...
     }@inputs:
@@ -66,6 +66,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              extraSpecialArgs = { inherit inputs helix-plugins; };
               users.alohahenry = import ./home-manager/home.nix;
               # users.root = /home/alohahenry/.config/home-manager/home.nix;
             };

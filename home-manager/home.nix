@@ -7,10 +7,12 @@
 {
   home.packages = with pkgs; [
     # clash-verge-rev
+    netease-cloud-music-gtk
     ansifilter
     eza
     ripgrep
     zoxide
+    localsend
 
     # develop env(lsp)
 
@@ -44,6 +46,14 @@
     VISUAL = "hx";
     SUDO_EDITOR = "hx";
   };
+
+  # gtk = {
+  #   enable = true;
+  #   iconTheme = {
+  #     name = "Adwaita";
+  #     package = pkgs.adwaita-icon-theme;
+  #   };
+  # };
 
   xdg.configFile."niri/config.kdl".source = ./config.kdl;
   home.file.".local/share/fcitx5/rime/default.custom.yaml".source = ./default.custom.yaml;
@@ -170,115 +180,6 @@
     };
   };
 
-  # programs.waybar.enable = true;
-  # programs.waybar.settings.main = {
-  #   layer = "top";
-  #   position = "top";
-  #   height = 25;
-  #   output = [
-  #     "eDP-1"
-  #     "HDMI-A-1"
-  #   ];
-  #   modules-left = ["niri/workspace" "pulseaudio" "clock"];
-  #   modules-center = ["niri/window"];
-  #   modules-right = ["battery" "bluetooth" "cpu" "memory" "load" "network" "temperature"];
-  #   cpu = {
-  #     interval = 30;
-  #     format = " {usage}%";
-  #     cursor = true;
-  #     status = {
-  #       warning = 80;
-  #       critival = 90;
-  #     };
-  #   };
-  #   memory = {
-  #     interval = 30;
-  #     format = "  {used:0.1f}G";
-  #     status = {
-  #       warning = 80;
-  #       critival = 90;
-  #     };
-  #   };
-  #   temperature = {
-  #     interval = 10;
-  #     format = "{icon} {temperatureC}°";
-  #     critical-threshold = 90;
-  #     format-icons = ["" "" "" "" ""];
-  #   };
-  #   pulseaudio = {
-  #     format = "{icon}";
-  #     format-bluetooth = "{icon}";
-  #     tooltip-format = "{volume}%";
-  #     format-muted = "<span size='12pt'>󰝟</span>";
-  #     scroll-step = 2;
-  #     on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-  #     on-click-right = "hyprctl eval \"hl.exec_cmd('pavucontrol -t 4')\"";
-  #     format-icons = {
-  #       "headphone" = "";
-  #       "hands-free" = "";
-  #       "headset" = "";
-  #       "phone" = "";
-  #       "portable" = "";
-  #       "car" = "";
-  #       "default" = [
-  #         "<span size='12pt'>󰕿</span>"
-  #         "<span size='12pt'>󰖀</span>"
-  #         "<span size='12pt'>󰕾</span>"
-  #       ];
-  #     };
-  #   };
-  #   "niri/workspaces" = {
-  #       "format" = "{icon}";
-  #       "cursor"  = true;
-  #       "on-scroll-up" = "niri msg action focus-workspace-up";
-  #       "on-scroll-down" = "niri msg action focus-workspace-down";
-  #       "hide-empty" = true;
-  #       "format-icons" = {
-  #           "active" = "󰮯";
-  #           "default" = "";
-  #           "empty" = "";
-  #       };
-  #   };
-  #   "pulseaudio/slider" = {
-  #     "min" = 0;
-  #     "max" = 100;
-  #     "cursor" = true;
-  #     "on-click-right" = "hyprctl eval \"hl.exec_cmd('pavucontrol -t 4')\"";
-  #   };
-  #   "battery" = {
-  #       "interval" = 20;
-  #       "full-at" = 100;
-  #       "tooltip" = true;
-  #       "format-full" = "";
-  #       "format" = "{icon} {capacity}%";
-  #       "format-time" = "{H}:{M:02}";
-  #       "format-charging" = " {capacity}% ({time})";
-  #       "format-icons" = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂂" "󰁹"];
-  #       "states" = {
-  #           "warning" = 30;
-  #           "critical" = 15;
-  #       };
-  #   };
-  #   "clock" = {
-  #       "timezone" = "America/Argentina/Buenos_Aires";
-  #       "tooltip-format" = "<tt><small>{calendar}</small></tt>";
-  #       "format-alt" = "{ :%H :%M %d %B %Y}";
-  #       "on-click-right" = "hyprctl eval \"hl.exec_cmd('alacritty --class=peaclock -e peaclock')\"";
-  #       "calendar" = {
-  #           "mode" = "year";
-  #           "weeks-pos" = "right";
-  #           "mode-mon-col" = 3;
-  #           "format" = {
-  #               "months" =   "<span color='#acb0d0'><b>{}</b></span>";
-  #               "weeks" =    "<span color='#7aa2f7'><b>W{}</b></span>";
-  #               "weekdays" = "<span color='#e0af68'><b>{}</b></span>";
-  #               "days" =     "<span color='#acb0d0'><b>{}</b></span>";
-  #               "today" =    "<span color='#41a6b5'><b><u>{}</u></b></span>";
-  #           };
-  #       };
-  #   };
-  # };
-
   programs.bash = {
     enable = true;
 
@@ -288,30 +189,14 @@
     #   '';
   };
 
-  # Will define in configuration.nix
-  # fonts.fontconfig = {
-  #   enable = true;
-  #   defaultFonts = {
-  #     monospace = [
-  #       "JetBrainsMono Nerd Font"
-  #       "Symbols Nerd Font Mono"
-  #     ];
-
-  #     sansSerif = [
-  #       "Noto Sans"
-  #       "Symbols Nerd Font"
-  #     ];
-
-  #     serif = [
-  #       "Noto Serif"
-  #       "Symbols Nerd Font"
-  #     ];
-  #   };
-  # };
-
+  xdg.configFile."fcitx5/config".source = ./fcitx5;
   xdg.configFile."kitty/Everforest.conf".source = ./Everforest.conf;
   programs.kitty = lib.mkForce {
     enable = true;
+    keybindings = {
+      "esc" =
+        "combine : send_text all \\x1b : launch --type=background ${pkgs.fcitx5}/bin/fcitx5-remote -c";
+    };
     settings = {
       font_size = 13;
       confirm_os_window_close = 0;
@@ -341,8 +226,8 @@
 
   xdg.configFile."helix/languages.toml".source = ./helix-languages.toml;
   programs.helix = {
-    enable = true;
     package = pkgs.steelix;
+    enable = true;
     defaultEditor = true;
 
     settings = {
