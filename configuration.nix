@@ -92,6 +92,8 @@
     HandleSuspendKey = "suspend";
   };
 
+  services.dbus.enable = true;
+
   # swapDevices = [
   #   {
   #     device = "/var/lib/swapfile";
@@ -335,7 +337,8 @@
     home-manager
     gtk4
     gtk4.dev
-    # glib
+    glib
+    gsettings-desktop-schemas
     adwaita-icon-theme
     hicolor-icon-theme
     chromium

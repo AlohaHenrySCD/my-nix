@@ -47,13 +47,43 @@
     SUDO_EDITOR = "hx";
   };
 
-  # gtk = {
-  #   enable = true;
-  #   iconTheme = {
-  #     name = "Adwaita";
-  #     package = pkgs.adwaita-icon-theme;
-  #   };
-  # };
+  gtk =
+    let
+      exConfig = {
+        gtk-application-prefer-dark-theme = false;
+        gtk-button-images = true;
+        gtk-cursor-blink = true;
+        gtk-cursor-blink-time = 500;
+        gtk-decoration-layout = "icon:minimize,maximize,close";
+        gtk-enable-animations = true;
+        gtk-menu-images = true;
+        gtk-modules = "colorreload-gtk-module";
+        gtk-primary-button-warps-slider = true;
+        gtk-sound-theme-name = "ocean";
+        gtk-toolbar-style = 3;
+        gtk-xft-dpi = 196608;
+      };
+    in
+    {
+      enable = true;
+      font = {
+        name = "Noto Sans 10";
+        package = pkgs.noto-fonts;
+      };
+      iconTheme = {
+        name = "papirus";
+        package = pkgs.papirus-icon-theme;
+      };
+      cursorTheme = {
+        name = "papirus_cursors";
+        size = 24;
+      };
+      gtk3.extraConfig = exConfig // {
+      };
+
+      gtk4.extraConfig = exConfig // {
+      };
+    };
 
   xdg.configFile."niri/config.kdl".source = ./config.kdl;
   home.file.".local/share/fcitx5/rime/default.custom.yaml".source = ./default.custom.yaml;
