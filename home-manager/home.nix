@@ -12,8 +12,12 @@
     eza
     ripgrep
     zoxide
-    localsend
-
+    # localsend
+    # (wechat.overrideAttrs {
+    #   src = fetchurl {
+    #     url = "https://dldir1v6.qq.com/weixin/Universal/Linux/WeChatLinux_arm64.AppImage";
+    #   };
+    # })
     # develop env(lsp)
 
     rustc

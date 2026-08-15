@@ -44,22 +44,23 @@
   #     moka
   #   ];
   # };
-  nixpkgs.overlays = [ inputs.helix-plugins.overlays.default ];
 
-  programs.helix = {
-    enable = true;
-    plugins = with pkgs.helixPlugins; [
-      notify
-      oil
-      breadcrumbs
-      fake-warp
-      smooth-scroll
-      forest
-      glyph
-      show-keys
-      moka
-    ];
-  };
+  # nixpkgs.overlays = [ inputs.helix-plugins.overlays.default ];
+
+  # programs.helix = {
+  #   enable = true;
+  #   plugins = with pkgs.helixPlugins; [
+  #     notify
+  #     oil
+  #     breadcrumbs
+  #     fake-warp
+  #     smooth-scroll
+  #     forest
+  #     glyph
+  #     show-keys
+  #     moka
+  #   ];
+  # };
 
   # brightness controll
   hardware.brillo.enable = true;
@@ -135,10 +136,17 @@
     };
   };
 
-  fonts.packages = [
-    pkgs.jetbrains-mono
-  ]
-  ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    nerd-fonts.caskaydia-cove
+    noto-fonts # 基础西文字体
+    noto-fonts-cjk-sans # CJK 无衬线（简体中文、繁体中文、日文、韩文）
+    noto-fonts-cjk-serif # CJK 衬线/宋体（可选）
+    noto-fonts-color-emoji # Emoji 彩色表情符号
+  ];
+  # ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   programs.niri.enable = true;
   services.greetd = {
@@ -280,6 +288,7 @@
   };
 
   nix.settings = {
+    max-jobs = 8;
     experimental-features = [
       "flakes"
       "nix-command"
@@ -387,6 +396,7 @@
     XMODIFIERS = "@im=fcitx";
     RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
     WAYLAND_DISPLAY = "wayland-1";
+    # GDK_BACKEND = "wayland";
     DISPLAY = "wayland-1";
   };
 
