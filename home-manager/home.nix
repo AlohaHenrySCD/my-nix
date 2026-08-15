@@ -12,6 +12,7 @@
     eza
     ripgrep
     zoxide
+    jq # json format
     # localsend
     # (wechat.overrideAttrs {
     #   src = fetchurl {

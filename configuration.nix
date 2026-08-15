@@ -6,6 +6,34 @@
   ...
 }:
 {
+  # nixpkgs.overlays = [
+  #   (final: prev: {
+  #     nanoemoji = prev.nanoemoji.overrideAttrs (oldAttrs: {
+  #       src = prev.fetchurl {
+  #         # url = "https://github.com/googlefonts/nanoemoji/archive/refs/tags/v0.16.0.tar.gz";
+  #         # hash = "sha256-FysyKC01XBnRiur5RR9fcsTxQqE8x0JJHSoe3q6JtKc=";
+  #       };
+  #     });
+  #   })
+  # ];
+  nixpkgs.overlays = [
+    (final: prev: {
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (pythonFinal: pythonPrev: {
+          nanoemoji = pythonPrev.nanoemoji.overrideAttrs (oldAttrs: {
+            version = "0.16.0";
+            src = prev.fetchFromGitHub {
+              owner = "googlefonts";
+              repo = "nanoemoji";
+              rev = "v0.16.0";
+              hash = "sha256-FysyKC01XBnRiur5RR9fcsTxQqE8x0JJHSoe3q6JtKc=";
+            };
+            doCheck = false;
+          });
+        })
+      ];
+    })
+  ];
   users.users.alohahenry = {
     isNormalUser = true;
     home = "/home/alohahenry";
@@ -141,10 +169,10 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
     nerd-fonts.caskaydia-cove
-    noto-fonts # 基础西文字体
-    noto-fonts-cjk-sans # CJK 无衬线（简体中文、繁体中文、日文、韩文）
-    noto-fonts-cjk-serif # CJK 衬线/宋体（可选）
-    noto-fonts-color-emoji # Emoji 彩色表情符号
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    noto-fonts-color-emoji
   ];
   # ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
