@@ -188,6 +188,13 @@
   };
   systemd.user.services.niri.enableDefaultPath = false;
 
+  programs.clash-verge = {
+    enable = true;
+    autoStart = true;
+    serviceMode = true;
+
+  };
+
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
@@ -331,7 +338,11 @@
   networking = {
     # hostName = "alohahenry";
     networkmanager.enable = true;
-    networkmanager.wifi.backend = "iwd";
+    networkmanager.wifi.backend = "wpa_supplicant";
+    networkmanager.unmanaged = [
+      "Mihomo"
+      "Meta"
+    ];
     # networkmanager.settings = {
     #   main.ndisc = "external";
     # };
@@ -355,10 +366,10 @@
     enableIPv6 = true;
     # useDHCP = true;
     # dhcpcd.persistent = true;
-    wireless.iwd = {
-      enable = true;
-      settings.General.EnableNetworkConfiguration = true;
-    };
+    # wireless.iwd = {
+    #   enable = true;
+    #   settings.General.EnableNetworkConfiguration = true;
+    # };
   };
 
   programs.starship.enable = true;
@@ -385,13 +396,14 @@
     navi
     pavucontrol
     fzf
-    # helix
-    steelix
-    steel
+    helix
+    # steelix
+    # steel
     alacritty
     fuzzel
     kitty
     hugo
+    clash-verge-rev
 
     # gui
     kdePackages.kate
@@ -404,6 +416,7 @@
     lazygit
 
     # gaming
+    # osu-lazer
     # hmcl
     # sbclPackages.frpc
     # frpc

@@ -6,21 +6,17 @@
 }:
 {
   home.packages = with pkgs; [
-    # clash-verge-rev
     netease-cloud-music-gtk
     ansifilter
+    halloy
     eza
     ripgrep
     zoxide
-    jq # json format
+    jq
     # localsend
-    # (wechat.overrideAttrs {
-    #   src = fetchurl {
-    #     url = "https://dldir1v6.qq.com/weixin/Universal/Linux/WeChatLinux_arm64.AppImage";
-    #   };
-    # })
-    # develop env(lsp)
 
+    uv
+    black
     rustc
     cargo
     rustfmt
@@ -261,7 +257,7 @@
 
   xdg.configFile."helix/languages.toml".source = ./helix-languages.toml;
   programs.helix = {
-    package = pkgs.steelix;
+    # package = pkgs.steelix;
     enable = true;
     defaultEditor = true;
 
