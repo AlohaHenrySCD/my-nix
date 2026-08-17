@@ -13,6 +13,11 @@
     ripgrep
     zoxide
     jq
+    qbittorrent
+    # librespot
+    ncspot
+    libreoffice
+    # animeko
     # localsend
 
     uv
