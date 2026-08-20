@@ -6,16 +6,6 @@
   ...
 }:
 {
-  # nixpkgs.overlays = [
-  #   (final: prev: {
-  #     nanoemoji = prev.nanoemoji.overrideAttrs (oldAttrs: {
-  #       src = prev.fetchurl {
-  #         # url = "https://github.com/googlefonts/nanoemoji/archive/refs/tags/v0.16.0.tar.gz";
-  #         # hash = "sha256-FysyKC01XBnRiur5RR9fcsTxQqE8x0JJHSoe3q6JtKc=";
-  #       };
-  #     });
-  #   })
-  # ];
   nixpkgs.overlays = [
     (final: prev: {
       pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
@@ -389,7 +379,6 @@
     gsettings-desktop-schemas
     adwaita-icon-theme
     hicolor-icon-theme
-    chromium
     asahi-bless
     git
     tlrc
@@ -403,11 +392,14 @@
     fuzzel
     kitty
     hugo
-    clash-verge-rev
+    mako
+    libnotify
 
     # gui
+    chromium
     kdePackages.kate
     papers
+    clash-verge-rev
 
     # custom
     i3bar-river

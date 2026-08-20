@@ -94,6 +94,8 @@
   xdg.configFile."niri/config.kdl".source = ./config.kdl;
   home.file.".local/share/fcitx5/rime/default.custom.yaml".source = ./default.custom.yaml;
 
+  xdg.configFile."mako/config".source = ./mako;
+
   xdg.configFile."tlrc/config/toml".source = ./tlrc.toml;
 
   programs.obs-studio = {
