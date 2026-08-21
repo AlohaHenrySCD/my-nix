@@ -282,8 +282,21 @@ animations
 // Find more information on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Window-Rules
 
-// Work around WezTerm's initial configure bug
-// by setting an empty default-column-width.
+window-rule {
+    match app-id="^pomotroid$"
+
+    open-floating true
+
+    default-column-width { fixed 360; }
+    default-window-height { fixed 478; }
+
+    default-floating-position x=20 y=20 relative-to="top-right"
+
+    focus-ring {
+        off
+    }
+}
+
 window-rule {
     // This regular expression is intentionally made as specific as possible,
     // since this is the default config, and we want no false positives.

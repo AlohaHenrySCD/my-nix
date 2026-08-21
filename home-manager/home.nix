@@ -56,14 +56,13 @@
   gtk =
     let
       exConfig = {
-        gtk-application-prefer-dark-theme = false;
+        gtk-application-prefer-dark-theme = true;
         gtk-button-images = true;
         gtk-cursor-blink = true;
         gtk-cursor-blink-time = 500;
         gtk-decoration-layout = "icon:minimize,maximize,close";
         gtk-enable-animations = true;
         gtk-menu-images = true;
-        gtk-modules = "colorreload-gtk-module";
         gtk-primary-button-warps-slider = true;
         gtk-sound-theme-name = "ocean";
         gtk-toolbar-style = 3;
@@ -75,6 +74,10 @@
       font = {
         name = "Noto Sans 10";
         package = pkgs.noto-fonts;
+      };
+      theme = {
+        package = pkgs.everforest-gtk-theme;
+        name = "EverForest";
       };
       iconTheme = {
         name = "papirus";
@@ -102,6 +105,39 @@
     enable = true;
   };
 
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set -g fish_greeting "Hello! AlohaHenry"
+      # set fish_cursor_default block
+      abbr --add add --set-cursor='%' 'nix shell nixpkgs#%'
+    '';
+    shellAbbrs = {
+      ls = "eza";
+      la = "eza -a";
+      ll = "eza -al";
+      cd = "z";
+      grep = "rg";
+    };
+    shellAliases = {
+      bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
+    };
+    functions = {
+      mkcd = ''
+        mkdir -p -- $argv[1]
+        and cd -- $argv[1]
+      '';
+      rm = ''
+        mkdir -p ~/.trash
+        mv -- $agrv ~/.trash/
+      '';
+      manrg = ''
+        man $argv[1] | col -b | rg -C 3 -- $argv[2]
+      '';
+
+    };
+  };
+
   programs.git = {
     enable = true;
     settings = {
@@ -125,6 +161,12 @@
         hostname = "github.com";
         user = "git";
         identityFile = "~/.ssh/id_ed25519";
+      };
+
+      nixpkgs = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519_nixpkgs.pub";
       };
     };
 
@@ -231,6 +273,7 @@
   xdg.configFile."kitty/Everforest.conf".source = ./Everforest.conf;
   programs.kitty = lib.mkForce {
     enable = true;
+    # mouse_map = "mouse_map left release ungrabbed mouse_handle_click selection link";
     keybindings = {
       "esc" =
         "combine : send_text all \\x1b : launch --type=background ${pkgs.fcitx5}/bin/fcitx5-remote -c";

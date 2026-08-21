@@ -34,7 +34,6 @@
       "networkmanager"
       "openrazer"
     ];
-    # shell = pkgs.fish;
   };
   nixpkgs.config.allowUnfree = true;
 
@@ -88,7 +87,7 @@
   # services.desktopManager.plasma6.enable = true;
   imports = [
     inputs.nixos-apple-silicon.nixosModules.default
-    inputs.helix-plugins.nixosModules.default # Run `sudo nixos-generate-config --show-hardware-config | tee hardware-configuration.nix`
+    # inputs.helix-plugins.nixosModules.default # Run `sudo nixos-generate-config --show-hardware-config | tee hardware-configuration.nix`
     # and uncomment this line.
     ./hardware-configuration.nix
   ];
@@ -198,26 +197,7 @@
     config.common.deault = "*";
   };
 
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set -g fish_greeting ""
-    '';
-    shellAbbrs = {
-      ls = "eza";
-      la = "eza -a";
-      ll = "eza -al";
-      cd = "z";
-      grep = "rg";
-      add = "nix shell nixpkgs#";
-    };
-    shellAliases = {
-      bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
-    };
-    # initExtra = lib.mkAfter ''
-    #     eval
-    #   ''
-  };
+  programs.fish.enable = true;
 
   programs.chromium = {
     enable = true;
@@ -327,6 +307,10 @@
   # services.clatd.enable = true;
   networking = {
     # hostName = "alohahenry";
+    extraHosts = ''
+      0.0.0.0 audio-cf-del-874.spotifycdn.com
+      0.0.0.0 audio-fa-del-874.spotifycdn.com
+    '';
     networkmanager.enable = true;
     networkmanager.wifi.backend = "wpa_supplicant";
     networkmanager.unmanaged = [

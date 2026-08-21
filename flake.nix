@@ -14,11 +14,15 @@
       url = "github:tpwrules/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix-plugins.url = "github:maxschipper/helix-plugins-nix";
-    hjem = {
-      url = "github:feel-co/hjem";
-      inputs.nixpkgs.follows = "nixpkgs";
+    gruvbox-gtk = {
+      url = "github:Fausto-Korpsvart/Gruvbox-GTK-Theme";
+      flake = false;
     };
+    # helix-plugins.url = "github:maxschipper/helix-plugins-nix";
+    # hjem = {
+    #   url = "github:feel-co/hjem";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # frpc.url = "https://nya.globalslb.net/natfrp/client/frpc/0.51.0-sakura-14/frpc_linux_arm64";
     # clash-verge-rev = {
     #   url = "github:clash-verge-rev/clash-verge-rev";
@@ -31,8 +35,9 @@
       nixpkgs,
       nirimod,
       home-manager,
-      helix-plugins,
-      hjem,
+      gruvbox-gtk,
+      # helix-plugins,
+      # hjem,
       # frpc,
       # clash-verge-rev,
       ...
@@ -59,14 +64,14 @@
         inherit system;
         specialArgs = { inherit inputs; };
         modules = [
-          hjem.nixosModules.default
+          # hjem.nixosModules.default
           ./configuration.nix
           home-manager.nixosModules.default
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs helix-plugins; };
+              extraSpecialArgs = { inherit inputs gruvbox-gtk; };
               users.alohahenry = import ./home-manager/home.nix;
               # users.root = /home/alohahenry/.config/home-manager/home.nix;
             };
