@@ -50,6 +50,14 @@
     VISUAL = "hx";
     SUDO_EDITOR = "hx";
   };
+  home.pointerCursor = {
+    enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    size = 24;
+
+    gtk.enable = true;
+  };
 
   gtk = {
     enable = true;
@@ -59,18 +67,19 @@
     };
     theme = {
       package = pkgs.everforest-gtk-theme;
-      name = "EverForest";
+      name = "Everforest-Dark-hdpi";
     };
     iconTheme = {
-      name = "papirus";
+      name = "Papirus";
       package = pkgs.papirus-icon-theme;
     };
-    cursorTheme = {
-      name = "papirus_cursors";
-      size = 24;
-    };
+    # cursorTheme = {
+    #   name = "Bibata-Modern-Ice";
+    #   package = pkgs.bibata-cursors;
+    # };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
+      # gtk-cursor-theme-name = "Bibata-Modern-Ice";
       gtk-button-images = true;
       gtk-cursor-blink = true;
       gtk-cursor-blink-time = 500;
@@ -87,6 +96,7 @@
       gtk-cursor-blink = true;
       gtk-cursor-blink-time = 500;
       gtk-decoration-layout = "icon:minimize,maximize,close";
+      # gtk-cursor-theme-name = "Bibata-Modern-Ice";
       gtk-enable-animations = true;
       gtk-primary-button-warps-slider = true;
       gtk-sound-theme-name = "ocean";

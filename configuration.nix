@@ -317,8 +317,6 @@
     gtk4.dev
     glib
     gsettings-desktop-schemas
-    adwaita-icon-theme
-    hicolor-icon-theme
     asahi-bless
     git
     tlrc
@@ -368,6 +366,7 @@
     WAYLAND_DISPLAY = "wayland-1";
     # GDK_BACKEND = "wayland";
     DISPLAY = "wayland-1";
+    # GSK_RENDERER = "gl";
   };
 
   nix.gc = {
