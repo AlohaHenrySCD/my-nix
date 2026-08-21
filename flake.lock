@@ -15,22 +15,6 @@
         "type": "github"
       }
     },
-    "gruvbox-gtk": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1761253508,
-        "narHash": "sha256-RXoPj/aj9OCTIi8xWatG0QpDAUh102nFOipdSIiqt7o=",
-        "owner": "Fausto-Korpsvart",
-        "repo": "Gruvbox-GTK-Theme",
-        "rev": "578cd220b5ff6e86b078a6111d26bb20ec8c733f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Fausto-Korpsvart",
-        "repo": "Gruvbox-GTK-Theme",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -125,7 +109,6 @@
     },
     "root": {
       "inputs": {
-        "gruvbox-gtk": "gruvbox-gtk",
         "home-manager": "home-manager",
         "nirimod": "nirimod",
         "nixos-apple-silicon": "nixos-apple-silicon",

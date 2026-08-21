@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  # inputs,
   ...
 }:
 {
@@ -14,7 +13,6 @@
     zoxide
     jq
     qbittorrent
-    # librespot
     ncspot
     libreoffice
     # animeko
@@ -53,46 +51,48 @@
     SUDO_EDITOR = "hx";
   };
 
-  gtk =
-    let
-      exConfig = {
-        gtk-application-prefer-dark-theme = true;
-        gtk-button-images = true;
-        gtk-cursor-blink = true;
-        gtk-cursor-blink-time = 500;
-        gtk-decoration-layout = "icon:minimize,maximize,close";
-        gtk-enable-animations = true;
-        gtk-menu-images = true;
-        gtk-primary-button-warps-slider = true;
-        gtk-sound-theme-name = "ocean";
-        gtk-toolbar-style = 3;
-        gtk-xft-dpi = 196608;
-      };
-    in
-    {
-      enable = true;
-      font = {
-        name = "Noto Sans 10";
-        package = pkgs.noto-fonts;
-      };
-      theme = {
-        package = pkgs.everforest-gtk-theme;
-        name = "EverForest";
-      };
-      iconTheme = {
-        name = "papirus";
-        package = pkgs.papirus-icon-theme;
-      };
-      cursorTheme = {
-        name = "papirus_cursors";
-        size = 24;
-      };
-      gtk3.extraConfig = exConfig // {
-      };
-
-      gtk4.extraConfig = exConfig // {
-      };
+  gtk = {
+    enable = true;
+    font = {
+      name = "Noto Sans";
+      package = pkgs.noto-fonts;
     };
+    theme = {
+      package = pkgs.everforest-gtk-theme;
+      name = "EverForest";
+    };
+    iconTheme = {
+      name = "papirus";
+      package = pkgs.papirus-icon-theme;
+    };
+    cursorTheme = {
+      name = "papirus_cursors";
+      size = 24;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+      gtk-button-images = true;
+      gtk-cursor-blink = true;
+      gtk-cursor-blink-time = 500;
+      gtk-decoration-layout = "icon:minimize,maximize,close";
+      gtk-enable-animations = true;
+      gtk-menu-images = true;
+      gtk-primary-button-warps-slider = true;
+      gtk-sound-theme-name = "ocean";
+      gtk-toolbar-style = 3;
+      gtk-xft-dpi = 196608;
+    };
+
+    gtk4.extraConfig = {
+      gtk-cursor-blink = true;
+      gtk-cursor-blink-time = 500;
+      gtk-decoration-layout = "icon:minimize,maximize,close";
+      gtk-enable-animations = true;
+      gtk-primary-button-warps-slider = true;
+      gtk-sound-theme-name = "ocean";
+      gtk-xft-dpi = 196608;
+    };
+  };
 
   xdg.configFile."niri/config.kdl".source = ./config.kdl;
   home.file.".local/share/fcitx5/rime/default.custom.yaml".source = ./default.custom.yaml;
@@ -263,10 +263,6 @@
   programs.bash = {
     enable = true;
 
-    # initExtra = ''
-    #   # include .profile if it exists
-    #   [[ -f ~/.profile]] && . ~/.profile
-    #   '';
   };
 
   xdg.configFile."fcitx5/config".source = ./fcitx5;
@@ -307,7 +303,6 @@
 
   xdg.configFile."helix/languages.toml".source = ./helix-languages.toml;
   programs.helix = {
-    # package = pkgs.steelix;
     enable = true;
     defaultEditor = true;
 

@@ -37,19 +37,7 @@
   };
   nixpkgs.config.allowUnfree = true;
 
-  # nixpkgs.overlays = [ inputs.helix-plugins.overlays.default ];
-  # hjem.extraModules = [ inputs.helix-plugins.hjemModules.default ];
-
-  # hjem.users.alohahenry = {
-  #   enable = true;
-  #   user = "alohahenry";
-  #   directory = "/home/alohahenry";
-
-  # };
-  # hjem.users.alohahenry.programs.helix = {
-  #   package = pkgs.steelix;
-  #   enable = true;
-  #   plugins = with pkgs.helixPlugins; [
+  # some helix plugins
   #     notify
   #     oil
   #     breadcrumbs
@@ -59,36 +47,14 @@
   #     glyph
   #     show-keys
   #     moka
-  #   ];
-  # };
-
-  # nixpkgs.overlays = [ inputs.helix-plugins.overlays.default ];
-
-  # programs.helix = {
-  #   enable = true;
-  #   plugins = with pkgs.helixPlugins; [
-  #     notify
-  #     oil
-  #     breadcrumbs
-  #     fake-warp
-  #     smooth-scroll
-  #     forest
-  #     glyph
-  #     show-keys
-  #     moka
-  #   ];
-  # };
 
   # brightness controll
   hardware.brillo.enable = true;
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
-  # services.desktopManager.plasma6.enable = true;
   imports = [
     inputs.nixos-apple-silicon.nixosModules.default
-    # inputs.helix-plugins.nixosModules.default # Run `sudo nixos-generate-config --show-hardware-config | tee hardware-configuration.nix`
-    # and uncomment this line.
     ./hardware-configuration.nix
   ];
   services.pipewire = {
@@ -106,7 +72,6 @@
     HandleLidSwitch = "suspend";
     # HibernateDelaySec = "1h";
     HandleLidSwitchExternalPower = "ignore";
-    # testing
     HandleSuspendKey = "suspend";
   };
 
@@ -307,10 +272,6 @@
   # services.clatd.enable = true;
   networking = {
     # hostName = "alohahenry";
-    extraHosts = ''
-      0.0.0.0 audio-cf-del-874.spotifycdn.com
-      0.0.0.0 audio-fa-del-874.spotifycdn.com
-    '';
     networkmanager.enable = true;
     networkmanager.wifi.backend = "wpa_supplicant";
     networkmanager.unmanaged = [
@@ -348,11 +309,6 @@
 
   programs.starship.enable = true;
 
-  # services.mihomo = {
-  #   enable = true;
-  #   configFile = "/home/alohahenry/.config/mihomo.yaml";
-  # };
-
   environment.systemPackages = with pkgs; [
     # base
     # mesa
@@ -370,8 +326,6 @@
     pavucontrol
     fzf
     helix
-    # steelix
-    # steel
     alacritty
     fuzzel
     kitty
@@ -393,7 +347,6 @@
 
     # gaming
     # osu-lazer
-    # hmcl
     # sbclPackages.frpc
     # frpc
     jdk8
