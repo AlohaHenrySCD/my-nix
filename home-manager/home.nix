@@ -15,8 +15,13 @@
     qbittorrent
     ncspot
     libreoffice
+    bat
     # animeko
     # localsend
+
+    pkg-config
+    glib
+    gtk4
 
     uv
     black
@@ -52,8 +57,12 @@
   };
   home.pointerCursor = {
     enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Ice";
+    # package = pkgs.bibata-cursors;
+    package = pkgs.everforest-cursors;
+    # package = pkgs.phinger-cursors;
+    # name = "Bibata-Modern-Ice";
+    name = "everforest-cursors";
+    # name = "phinger-cursors-light";
     size = 24;
 
     gtk.enable = true;
@@ -67,7 +76,7 @@
     };
     theme = {
       package = pkgs.everforest-gtk-theme;
-      name = "Everforest-Dark-hdpi";
+      name = "Everforest-Dark";
     };
     iconTheme = {
       name = "Papirus";

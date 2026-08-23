@@ -344,16 +344,19 @@
     lazygit
 
     # gaming
-    # osu-lazer
     # sbclPackages.frpc
     # frpc
     jdk8
     jdk25
     # glfw
+    (pkgs.osu-lazer.overrideAttrs (old: {
+      meta = old.meta // {
+        platforms = old.meta.platforms ++ [ "aarch64-linux" ];
+      };
+    }))
     prismlauncher
     openrazer-daemon
     polychromatic
-
   ];
 
   environment.sessionVariables = lib.mkForce {
