@@ -16,6 +16,7 @@
     ncspot
     libreoffice
     bat
+    ov
     # animeko
     # localsend
 
@@ -137,10 +138,13 @@
       ll = "eza -al";
       cd = "z";
       grep = "rg";
-    };
-    shellAliases = {
+      ove = "ov --exec --";
       bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
+      nix-clean = "nix-collect-garbage && sudo nix-collect-garage && sudo journalctl --vacuum-size=300M";
     };
+    # shellAliases = {
+    #   bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
+    # };
     functions = {
       mkcd = ''
         mkdir -p -- $argv[1]
@@ -286,12 +290,17 @@
 
   xdg.configFile."fcitx5/config".source = ./fcitx5;
   xdg.configFile."kitty/Everforest.conf".source = ./Everforest.conf;
+  xdg.configFile."kitty/hotkeys-overlay.fish".source = ./hotkeys-overlay.fish;
   programs.kitty = lib.mkForce {
     enable = true;
     # mouse_map = "mouse_map left release ungrabbed mouse_handle_click selection link";
     keybindings = {
       "esc" =
         "combine : send_text all \\x1b : launch --type=background ${pkgs.fcitx5}/bin/fcitx5-remote -c";
+      "ctrl+shift+q" = "no_op";
+      "ctrl+shift+enter" = "no_op";
+      "ctrl+shift+/" =
+        "launch --type=overlay --title=Hotkeys fish -i ~/.config/kitty/hotkeys-overlay.fish";
     };
     settings = {
       font_size = 13;
