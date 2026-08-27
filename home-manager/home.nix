@@ -5,6 +5,8 @@
 }:
 {
   home.packages = with pkgs; [
+    codex
+    obsidian
     netease-cloud-music-gtk
     ansifilter
     halloy
@@ -24,6 +26,7 @@
     glib
     gtk4
 
+    python3
     uv
     black
     rustc
@@ -139,12 +142,12 @@
       cd = "z";
       grep = "rg";
       ove = "ov --exec --";
-      bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
+      # bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
       nix-clean = "nix-collect-garbage && sudo nix-collect-garage && sudo journalctl --vacuum-size=300M";
     };
-    # shellAliases = {
-    #   bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
-    # };
+    shellAliases = {
+      bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
+    };
     functions = {
       mkcd = ''
         mkdir -p -- $argv[1]
@@ -157,7 +160,9 @@
       manrg = ''
         man $argv[1] | col -b | rg -C 3 -- $argv[2]
       '';
-
+      fd = ''
+        find . -iname $argv[1] 2>/dev/null
+      '';
     };
   };
 
