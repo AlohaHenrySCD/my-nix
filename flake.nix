@@ -40,20 +40,7 @@
         inherit system;
         specialArgs = { inherit inputs; };
         modules = [
-          # hjem.nixosModules.default
           ./configuration.nix
-          home-manager.nixosModules.default
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {
-                inherit inputs;
-              };
-              users.alohahenry = import ./home/home.nix;
-              # users.root = /home/alohahenry/.config/home/home.nix;
-            };
-          }
         ];
       };
       formatter.${system} = pkgs.nixfmt-rfc-style;

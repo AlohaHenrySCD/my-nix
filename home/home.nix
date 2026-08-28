@@ -8,21 +8,13 @@
     # wechat
     # wechat-uos
     codex
-    obsidian
-    netease-cloud-music-gtk
     ansifilter
-    halloy
     eza
     ripgrep
-    zoxide
     jq
-    qbittorrent
-    ncspot
-    libreoffice
     bat
     ov
     # animeko
-    localsend
     fzf
     tlrc
     navi
@@ -31,8 +23,6 @@
     btop
 
     pkg-config
-    glib
-    gtk4
 
     (lib.hiPrio jdk25)
     (lib.lowPrio jdk8)
@@ -46,7 +36,6 @@
     clippy
     rust-analyzer
     # clang
-    gcc
     lld
     llvm
     gnumake
@@ -69,82 +58,16 @@
   home.stateVersion = "26.05";
   home.enableNixpkgsReleaseCheck = false;
   home.username = "alohahenry";
-  home.homeDirectory = "/home/alohahenry";
   home.sessionVariables = {
     EDITOR = "hx";
     VISUAL = "hx";
     SUDO_EDITOR = "hx";
+    RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
     RUSTUP_DIST_SERVER = "https://rsproxy.cn";
     RUSTUP_UPDATE_ROOT = "https://rsproxy.cn/rustup";
   };
-  home.pointerCursor = {
-    enable = true;
-    # package = pkgs.bibata-cursors;
-    package = pkgs.everforest-cursors;
-    # package = pkgs.phinger-cursors;
-    # name = "Bibata-Modern-Ice";
-    name = "everforest-cursors";
-    # name = "phinger-cursors-light";
-    size = 24;
-
-    gtk.enable = true;
-  };
-
-  gtk = {
-    enable = true;
-    font = {
-      name = "Noto Sans";
-      package = pkgs.noto-fonts;
-    };
-    theme = {
-      package = pkgs.everforest-gtk-theme;
-      name = "Everforest-Dark";
-    };
-    iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
-    };
-    # cursorTheme = {
-    #   name = "Bibata-Modern-Ice";
-    #   package = pkgs.bibata-cursors;
-    # };
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
-      # gtk-cursor-theme-name = "Bibata-Modern-Ice";
-      gtk-button-images = true;
-      gtk-cursor-blink = true;
-      gtk-cursor-blink-time = 500;
-      gtk-decoration-layout = "icon:minimize,maximize,close";
-      gtk-enable-animations = true;
-      gtk-menu-images = true;
-      gtk-primary-button-warps-slider = true;
-      gtk-sound-theme-name = "ocean";
-      gtk-toolbar-style = 3;
-      gtk-xft-dpi = 196608;
-    };
-
-    gtk4.extraConfig = {
-      gtk-cursor-blink = true;
-      gtk-cursor-blink-time = 500;
-      gtk-decoration-layout = "icon:minimize,maximize,close";
-      # gtk-cursor-theme-name = "Bibata-Modern-Ice";
-      gtk-enable-animations = true;
-      gtk-primary-button-warps-slider = true;
-      gtk-sound-theme-name = "ocean";
-      gtk-xft-dpi = 196608;
-    };
-  };
-
-  xdg.configFile."niri/config.kdl".source = ./config.kdl;
-  home.file.".local/share/fcitx5/rime/default.custom.yaml".source = ./default.custom.yaml;
-
-  xdg.configFile."mako/config".source = ./mako;
 
   xdg.configFile."tlrc/config/toml".source = ./tlrc.toml;
-
-  programs.obs-studio = {
-    enable = true;
-  };
 
   programs.zoxide = {
     enable = true;
@@ -166,10 +89,6 @@
       grep = "rg";
       ove = "ov --exec --";
       # bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
-      nix-clean = "nix-collect-garbage && sudo nix-collect-garage && sudo journalctl --vacuum-size=300M";
-    };
-    shellAliases = {
-      bd = "sudo nixos-rebuild switch --impure --flake /etc/nixos ";
     };
     functions = {
       mkcd = ''
@@ -178,7 +97,7 @@
       '';
       rm = ''
         mkdir -p ~/.trash
-        mv -- $agrv ~/.trash/
+        mv -- $argv ~/.trash/
       '';
       manrg = ''
         man $argv[1] | col -b | rg -C 3 -- $argv[2]
@@ -200,8 +119,20 @@
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
 
-    matchBlocks = {
+    settings = {
+      "*" = {
+        ForwardAgent = false;
+        AddKeysToAgent = "no";
+        Compression = false;
+        ServerAliveInterval = 0;
+        ServerAliveCountMax = 3;
+        HashKnownHosts = false;
+        ControlMaster = "no";
+        ControlPersist = "no";
+
+      };
       blog = {
         hostname = "github.com";
         user = "git";
@@ -217,98 +148,15 @@
       nixpkgs = {
         hostname = "github.com";
         user = "git";
-        identityFile = "~/.ssh/id_ed25519_nixpkgs.pub";
+        identityFile = "~/.ssh/id_ed25519_nixpkgs";
       };
     };
-
   };
 
   xdg.configFile."starship.toml".source = ./starship.toml;
   programs.starship = {
-    enableFishIntegration = true;
-  };
-
-  programs.starship.enable = true;
-
-  programs.i3bar-river = {
     enable = true;
-    settings = {
-      font = "JetBriansMono Nerd Font Bold 15";
-      height = 22;
-      tags_padding = 25;
-      separator_width = 1;
-      command = "i3status-rs /home/alohahenry/.config/i3status-rust/config-default.toml";
-      background = "#3C4841FF";
-      color = "#d3c6aaff";
-      separator = "#83c092ff";
-      tag_fg = "#dbbc7fff";
-      tag_bg = "#3C4841FF";
-      tag_focused_fg = "#3C4841FF";
-      tag_focused_bg = "#a7c080ff";
-      tag_urgent_fg = "#3C4841FF";
-      tag_urgent_bg = "#e67e80ff";
-      tag_inactive_fg = "#dbbc7fff";
-      tag_inactive_bg = "#3C4841FF";
-    };
-  };
-  programs.i3status-rust.enable = true;
-  programs.i3status-rust = {
-    bars = {
-      default = {
-        blocks = [
-          {
-            block = "disk_space";
-            info_type = "available";
-            interval = 15;
-            path = "/";
-            warning = 20.0;
-            alert = 10.0;
-            format = "$icon$available";
-          }
-          # {
-          #   block = "keyboard_layout";
-          # }
-          {
-            block = "memory";
-            format = "^icon_memory_mem $mem_used_percents";
-            interval = 1;
-          }
-          {
-            block = "cpu";
-            format = "$icon $utilization";
-            interval = 1;
-          }
-          {
-            block = "battery";
-            format = "$icon $percentage $time";
-            full_format = "$icon";
-            interval = 3;
-          }
-          {
-            block = "net";
-            format = "$icon ";
-          }
-          {
-            block = "sound";
-            format = "$icon {$volume.eng(w:2)|}";
-          }
-          {
-            block = "time";
-            format = "$timestamp.datetime(f:'%a%m/%d %R') ";
-            interval = 60;
-          }
-        ];
-        settings = {
-          theme = {
-            theme = "gruvbox-light";
-            # overrides = {
-            #   separator_fg = "#A7C080FF";
-            # };
-          };
-        };
-        icons = "material-nf";
-      };
-    };
+    enableFishIntegration = true;
   };
 
   programs.bash = {
@@ -316,15 +164,12 @@
 
   };
 
-  xdg.configFile."fcitx5/config".source = ./fcitx5;
   xdg.configFile."kitty/Everforest.conf".source = ./Everforest.conf;
   xdg.configFile."kitty/hotkeys-overlay.fish".source = ./hotkeys-overlay.fish;
-  programs.kitty = lib.mkForce {
+  programs.kitty = {
     enable = true;
     # mouse_map = "mouse_map left release ungrabbed mouse_handle_click selection link";
     keybindings = {
-      "esc" =
-        "combine : send_text all \\x1b : launch --type=background ${pkgs.fcitx5}/bin/fcitx5-remote -c";
       "ctrl+shift+q" = "no_op";
       "ctrl+shift+enter" = "no_op";
       "ctrl+shift+/" =

@@ -249,7 +249,7 @@ layout {
     // layer-shell panels and regular gaps.
     struts 
 }
-spawn-at-startup "fcitx5"
+// spawn-at-startup "fcitx5"
 spawn-at-startup "mako"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:

@@ -37,6 +37,21 @@
   };
   nixpkgs.config.allowUnfree = true;
 
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = {
+      inherit inputs;
+    };
+    users.alohahenry = {
+      imports = [
+        ./home/home.nix
+        ./home/linux.nix
+      ];
+    };
+    # users.root = /home/alohahenry/.config/home/home.nix;
+  };
+
   # some helix plugins
   #     notify
   #     oil
@@ -51,10 +66,11 @@
   # brightness controll
   hardware.brillo.enable = true;
 
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.enable = false;
+  services.displayManager.sddm.wayland.enable = false;
   imports = [
     inputs.nixos-apple-silicon.nixosModules.default
+    inputs.home-manager.nixosModules.default
     # inputs.nirinit.nixosModules.nirinit
     ./hardware-configuration.nix
   ];
@@ -93,26 +109,6 @@
   #     size = 4*1024;
   #   }
   # ];
-
-  fonts.fontconfig = {
-    enable = true;
-    defaultFonts = {
-      monospace = [
-        "JetBrainsMono Nerd Font"
-        "Symbols Nerd Font Mono"
-      ];
-
-      sansSerif = [
-        "Noto Sans"
-        "Symbols Nerd Font"
-      ];
-
-      serif = [
-        "Noto Serif"
-        "Symbols Nerd Font"
-      ];
-    };
-  };
 
   services.keyd = {
     enable = true;
@@ -164,7 +160,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common.deault = "*";
+    config.common.default = "*";
   };
 
   programs.fish.enable = true;
@@ -186,26 +182,6 @@
       "RestoreOnStartup" = 1;
       "BackgroundModeEnabled" = false;
     };
-  };
-
-  i18n.defaultLocale = "zh_CN.UTF-8";
-  i18n.supportedLocales = [
-    "en_US.UTF-8/UTF-8"
-    "zh_CN.UTF-8/UTF-8"
-  ];
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-mozc
-      fcitx5-gtk
-      fcitx5-fluent
-      (fcitx5-rime.override {
-        rimeDataPkgs = [
-          pkgs.rime-ice
-        ];
-      })
-    ];
   };
 
   users.extraUsers.alohahenry = {
@@ -317,39 +293,14 @@
   environment.systemPackages = with pkgs; [
     # base
     # mesa
-    home-manager
-    gtk4
     gtk4.dev
-    glib
     gsettings-desktop-schemas
     asahi-bless
-    pavucontrol
-    alacritty
-    fuzzel
-    mako
-    libnotify
-
-    # gui
-    chromium
-    kdePackages.kate
-    papers
-    clash-verge-rev
-
-    # custom
-    i3bar-river
 
     # gaming
     # sbclPackages.frpc
     # frpc
     # glfw
-    (pkgs.osu-lazer.overrideAttrs (old: {
-      meta = old.meta // {
-        platforms = old.meta.platforms ++ [ "aarch64-linux" ];
-      };
-    }))
-    prismlauncher
-    openrazer-daemon
-    polychromatic
   ];
 
   environment.sessionVariables = lib.mkForce {
@@ -357,13 +308,13 @@
     LC_ALL = "zh_CN.UTF-8";
     LC_COLLATE = "zh_CN.UTF-8";
     LANG = "zh_CN.UTF-8";
-    XMODIFIERS = "@im=fcitx";
-    RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
-    WAYLAND_DISPLAY = "wayland-1";
-    # GDK_BACKEND = "wayland";
-    DISPLAY = "wayland-1";
-    # GSK_RENDERER = "gl";
   };
+
+  i18n.defaultLocale = "zh_CN.UTF-8";
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+    "zh_CN.UTF-8/UTF-8"
+  ];
 
   nix.gc = {
     automatic = true;
