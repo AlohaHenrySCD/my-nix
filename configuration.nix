@@ -55,7 +55,7 @@
   services.displayManager.sddm.wayland.enable = true;
   imports = [
     inputs.nixos-apple-silicon.nixosModules.default
-    inputs.nirinit.nixosModules.nirinit
+    # inputs.nirinit.nixosModules.nirinit
     ./hardware-configuration.nix
   ];
   services.pipewire = {
@@ -78,14 +78,14 @@
 
   services.dbus.enable = true;
 
-  services.nirinit = {
-    enable = true;
-    settings = {
-      launch = {
-        "chromium-example.com__-Default" = "example-web-app";
-      };
-    };
-  };
+  # services.nirinit = {
+  #   enable = true;
+  #   settings = {
+  #     launch = {
+  #       "chromium-example.com__-Default" = "example-web-app";
+  #     };
+  #   };
+  # };
 
   # swapDevices = [
   #   {

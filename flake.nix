@@ -14,10 +14,10 @@
       url = "github:tpwrules/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nirinit = {
-      url = "github:amaanq/nirinit";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nirinit = {
+    #   url = "github:amaanq/nirinit";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # frpc.url = "https://nya.globalslb.net/natfrp/client/frpc/0.51.0-sakura-14/frpc_linux_arm64";
   };
 
@@ -27,7 +27,7 @@
       nixpkgs,
       nirimod,
       home-manager,
-      nirinit,
+      # nirinit,
       # frpc,
       ...
     }@inputs:
