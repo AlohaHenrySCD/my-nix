@@ -5,6 +5,8 @@
 }:
 {
   home.packages = with pkgs; [
+    # wechat
+    # wechat-uos
     codex
     obsidian
     netease-cloud-music-gtk
@@ -20,7 +22,7 @@
     bat
     ov
     # animeko
-    # localsend
+    localsend
 
     pkg-config
     glib
@@ -34,7 +36,12 @@
     rustfmt
     clippy
     rust-analyzer
-    clang
+    # clang
+    gcc
+    lld
+    llvm
+    gnumake
+    cmake
     clang-tools
     bash-language-server
     vscode-css-languageserver

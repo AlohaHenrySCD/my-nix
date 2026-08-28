@@ -152,7 +152,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 2
+        width 3
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -624,5 +624,5 @@ window-rule {
     clip-to-geometry true
 }
 spawn-sh-at-startup "sleep 1 && exec i3bar-river"
-spawn-sh-at-startup "sleep 2 && exec chromium"
-spawn-sh-at-startup "sleep 2 && exec kitty"
+// spawn-sh-at-startup "sleep 2 && exec chromium"
+// spawn-sh-at-startup "sleep 2 && exec kitty"

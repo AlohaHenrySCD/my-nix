@@ -380,6 +380,8 @@
     # GDK_BACKEND = "wayland";
     DISPLAY = "wayland-1";
     # GSK_RENDERER = "gl";
+    RUSTUP_DIST_SERVER = "https://rsproxy.cn";
+    RUSTUP_UPDATE_ROOT = "https://rsproxy.cn/rustup";
   };
 
   nix.gc = {
