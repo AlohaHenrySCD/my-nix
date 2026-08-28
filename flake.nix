@@ -50,8 +50,8 @@
               extraSpecialArgs = {
                 inherit inputs;
               };
-              users.alohahenry = import ./home-manager/home.nix;
-              # users.root = /home/alohahenry/.config/home-manager/home.nix;
+              users.alohahenry = import ./home/home.nix;
+              # users.root = /home/alohahenry/.config/home/home.nix;
             };
           }
         ];

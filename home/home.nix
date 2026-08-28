@@ -34,8 +34,8 @@
     glib
     gtk4
 
-    jdk8
-    jdk25
+    (lib.hiPrio jdk25)
+    (lib.lowPrio jdk8)
 
     python3
     uv
