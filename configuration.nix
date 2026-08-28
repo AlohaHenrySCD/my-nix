@@ -37,21 +37,6 @@
   };
   nixpkgs.config.allowUnfree = true;
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = {
-      inherit inputs;
-    };
-    users.alohahenry = {
-      imports = [
-        ./home/home.nix
-        ./home/linux.nix
-      ];
-    };
-    # users.root = /home/alohahenry/.config/home/home.nix;
-  };
-
   # some helix plugins
   #     notify
   #     oil
@@ -70,7 +55,6 @@
   services.displayManager.sddm.wayland.enable = false;
   imports = [
     inputs.nixos-apple-silicon.nixosModules.default
-    inputs.home-manager.nixosModules.default
     # inputs.nirinit.nixosModules.nirinit
     ./hardware-configuration.nix
   ];

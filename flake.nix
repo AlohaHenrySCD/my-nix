@@ -1,5 +1,5 @@
 {
-  description = "NixOS starter flake with Apple Silicon support";
+  description = "AlohaHenry's Asahi-NixOS & macOS configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -14,6 +14,10 @@
       url = "github:tpwrules/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # nirinit = {
     #   url = "github:amaanq/nirinit";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -22,27 +26,72 @@
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
       nirimod,
       home-manager,
+      nix-darwin,
       # nirinit,
       # frpc,
       ...
-    }@inputs:
+    }:
     let
-      system = "aarch64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      linuxSystem = "aarch64-linux";
+      darwinSystem = "aarch64-darwin";
     in
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
+        system = linuxSystem;
         specialArgs = { inherit inputs; };
         modules = [
           ./configuration.nix
+          home-manager.nixosModules.default
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {
+                inherit inputs;
+              };
+              users.alohahenry = {
+                imports = [
+                  ./home/home.nix
+                  ./home/linux.nix
+                ];
+              };
+            };
+          }
         ];
       };
-      formatter.${system} = pkgs.nixfmt-rfc-style;
+
+      # macbook here is host name NEED MODIFY
+      darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./darwin-configuration.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {
+                inherit inputs;
+              };
+              users.alohahenry = {
+                imports = [
+                  ./home/home.nix
+                  ./home/darwin.nix
+                ];
+              };
+            };
+          }
+        ];
+      };
+
+      formatter.${linuxSystem} = nixpkgs.legacyPackages.${linuxSystem}.nixfmt-rfc-style;
+      formatter.${darwinSystem} = nixpkgs.legacyPackages.${darwinSystem}.nixfmt-rfc-style;
     };
 }
