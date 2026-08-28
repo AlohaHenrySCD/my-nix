@@ -23,10 +23,19 @@
     ov
     # animeko
     localsend
+    fzf
+    tlrc
+    navi
+    hugo
+    lazygit
+    btop
 
     pkg-config
     glib
     gtk4
+
+    jdk8
+    jdk25
 
     python3
     uv
@@ -65,6 +74,8 @@
     EDITOR = "hx";
     VISUAL = "hx";
     SUDO_EDITOR = "hx";
+    RUSTUP_DIST_SERVER = "https://rsproxy.cn";
+    RUSTUP_UPDATE_ROOT = "https://rsproxy.cn/rustup";
   };
   home.pointerCursor = {
     enable = true;
@@ -133,6 +144,11 @@
 
   programs.obs-studio = {
     enable = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   programs.fish = {
@@ -243,7 +259,7 @@
           {
             block = "disk_space";
             info_type = "available";
-            interval = 60;
+            interval = 15;
             path = "/";
             warning = 20.0;
             alert = 10.0;
@@ -255,18 +271,18 @@
           {
             block = "memory";
             format = "^icon_memory_mem $mem_used_percents";
-            interval = 3;
+            interval = 1;
           }
           {
             block = "cpu";
             format = "$icon $utilization";
-            interval = 3;
+            interval = 1;
           }
           {
             block = "battery";
             format = "$icon $percentage $time";
             full_format = "$icon";
-            interval = 5;
+            interval = 3;
           }
           {
             block = "net";

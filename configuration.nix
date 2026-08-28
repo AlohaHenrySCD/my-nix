@@ -159,11 +159,6 @@
 
   };
 
-  programs.zoxide = {
-    enable = true;
-    enableFishIntegration = true;
-  };
-
   programs.dconf.enable = true;
 
   xdg.portal = {
@@ -328,16 +323,9 @@
     glib
     gsettings-desktop-schemas
     asahi-bless
-    git
-    tlrc
-    navi
     pavucontrol
-    fzf
-    helix
     alacritty
     fuzzel
-    kitty
-    hugo
     mako
     libnotify
 
@@ -349,15 +337,10 @@
 
     # custom
     i3bar-river
-    starship
-    btop
-    lazygit
 
     # gaming
     # sbclPackages.frpc
     # frpc
-    jdk8
-    jdk25
     # glfw
     (pkgs.osu-lazer.overrideAttrs (old: {
       meta = old.meta // {
@@ -380,8 +363,6 @@
     # GDK_BACKEND = "wayland";
     DISPLAY = "wayland-1";
     # GSK_RENDERER = "gl";
-    RUSTUP_DIST_SERVER = "https://rsproxy.cn";
-    RUSTUP_UPDATE_ROOT = "https://rsproxy.cn/rustup";
   };
 
   nix.gc = {
