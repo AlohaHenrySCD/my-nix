@@ -29,9 +29,6 @@
 
   nix.gc = {
     automatic = true;
-    interval = {
-      Weekday = 7;
-    };
     options = "--delete-older-than 7d";
   };
 
@@ -61,10 +58,6 @@
   homebrew = {
     enable = true;
     enableFishIntegration = true;
-
-    # onActivation = {
-    #   autoUpdate = false;
-    # };
 
     casks = [
       "google-chrome"
