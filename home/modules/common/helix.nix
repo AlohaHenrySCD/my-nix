@@ -13,7 +13,7 @@
         completion-replace = true;
         soft-wrap.enable = true;
         line-number = "relative";
-        mouse = false;
+        mouse = true;
         cursorline = true;
         bufferline = "always";
         color-modes = true;

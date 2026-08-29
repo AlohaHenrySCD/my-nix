@@ -8,6 +8,7 @@
     ./modules/common/fish.nix
     ./modules/common/ssh.nix
     ./modules/common/kitty.nix
+    ./modules/common/helix.nix
   ];
 
   home.stateVersion = "26.05";
