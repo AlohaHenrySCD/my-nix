@@ -37,36 +37,53 @@
       ...
     }:
     let
-      linuxSystem = "aarch64-linux";
-      darwinSystem = "aarch64-darwin";
-    in
-    {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        system = linuxSystem;
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./configuration.nix
-          home-manager.nixosModules.default
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {
-                inherit inputs;
-              };
-              users.alohahenry = {
-                imports = [
+      mkNixos =
+        {
+          system,
+          hostModules,
+        }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+
+          specialArgs = {
+            inherit inputs;
+          };
+
+          modules = [
+            hostModules
+            home-manager.nixosModules.default
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+
+                extraSpecialArgs = {
+                  inherit inputs;
+                };
+                users.alohahenry.imports = [
                   ./home/home.nix
                   ./home/linux.nix
                 ];
               };
-            };
-          }
-        ];
+            }
+          ];
+        };
+    in
+    {
+      nixosConfigurations = {
+        asahi = mkNixos {
+          system = "aarch64-linux";
+          hostModules = ./hosts/asahi;
+        };
+
+        x86_64 = mkNixos {
+          system = "x86_64-linux";
+          hostModules = ./hosts/x86_64;
+        };
       };
 
       # macbook here is host name NEED MODIFY
-      darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.macbook = nix-darwin.lib.aarch64-darwin {
         specialArgs = {
           inherit inputs;
         };
@@ -91,7 +108,8 @@
         ];
       };
 
-      formatter.${linuxSystem} = nixpkgs.legacyPackages.${linuxSystem}.nixfmt-rfc-style;
-      formatter.${darwinSystem} = nixpkgs.legacyPackages.${darwinSystem}.nixfmt-rfc-style;
+      formatter.aarch64-linux = nixpkgs.legacyPackages.aarch64-linux.nixfmt-rfc-style;
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-rfc-style;
     };
 }
