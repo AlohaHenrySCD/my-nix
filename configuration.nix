@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  inputs,
   pkgs,
   ...
 }:
@@ -53,11 +52,6 @@
 
   services.displayManager.sddm.enable = false;
   services.displayManager.sddm.wayland.enable = false;
-  imports = [
-    inputs.nixos-apple-silicon.nixosModules.default
-    # inputs.nirinit.nixosModules.nirinit
-    ./hardware-configuration.nix
-  ];
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -68,13 +62,6 @@
     };
   };
   services.blueman.enable = true;
-
-  services.logind.settings.Login = {
-    HandleLidSwitch = "suspend";
-    # HibernateDelaySec = "1h";
-    HandleLidSwitchExternalPower = "ignore";
-    HandleSuspendKey = "suspend";
-  };
 
   services.dbus.enable = true;
 
@@ -189,16 +176,7 @@
   };
 
   boot = {
-    kernel.sysctl = {
-      "net.ipv6.conf.all.accept_ra" = 2;
-      "net.ipv6.conf.default.accept_ra" = 2;
-      "net.ipv6.conf.wlan0.accept_ra" = 2;
-    };
-    kernelParams = [
-      "appledrm.show_notch=1"
-    ];
     loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = false;
     loader.systemd-boot.configurationLimit = 8;
   };
 
@@ -207,12 +185,6 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
-  };
-  hardware.asahi = {
-    enable = true;
-    # useExperimentalGPUDriver = true;
-    peripheralFirmwareDirectory = /boot/vendorfw;
-    setupAsahiSound = true;
   };
 
   hardware.openrazer.enable = true;
@@ -279,7 +251,6 @@
     # mesa
     gtk4.dev
     gsettings-desktop-schemas
-    asahi-bless
 
     # gaming
     # sbclPackages.frpc

@@ -83,7 +83,7 @@
       };
 
       # macbook here is host name NEED MODIFY
-      darwinConfigurations.macbook = nix-darwin.lib.aarch64-darwin {
+      darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
         specialArgs = {
           inherit inputs;
         };
