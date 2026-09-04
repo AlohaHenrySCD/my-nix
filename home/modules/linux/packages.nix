@@ -5,6 +5,7 @@
 }:
 {
   home.packages = with pkgs; [
+    chromium
     netease-cloud-music-gtk
     halloy
     qbittorrent
