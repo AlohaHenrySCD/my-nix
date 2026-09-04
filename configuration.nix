@@ -23,6 +23,7 @@
       ];
     })
   ];
+  nixpkgs.config.allowUnsupportedSystem = true;
   users.users.alohahenry = {
     isNormalUser = true;
     home = "/home/alohahenry";
@@ -195,7 +196,7 @@
   };
 
   nix.settings = {
-    max-jobs = 8;
+    max-jobs = 16;
     experimental-features = [
       "flakes"
       "nix-command"
@@ -247,6 +248,7 @@
   programs.starship.enable = true;
 
   environment.systemPackages = with pkgs; [
+    # moved
     # base
     # mesa
     gtk4.dev

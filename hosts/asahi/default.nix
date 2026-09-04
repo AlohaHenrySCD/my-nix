@@ -12,6 +12,22 @@
 
   environment.systemPackages = with pkgs; [
     asahi-bless
+    picocom
+  ];
+
+  services.udev.extraRules = ''
+    SUBSYSTEM=="tty", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="316d", GOTO="m1n1"
+    GOTO="not_m1n1"
+
+    LABEL="m1n1"
+    GROUP="dialout", MODE="0660"
+    SUBSYSTEM=="tty", ATTRS{bInterfaceNumber}=="00", KERNEL=="ttyACM*", SYMLINK+="m1n1"
+    SUBSYSTEM=="tty", ATTRS{bInterfaceNumber}=="02", KERNEL=="ttyACM*", SYMLINK+="m1n1-sec"
+    LABEL="not_m1n1"
+  '';
+
+  users.users.alohahenry.extraGroups = [
+    "dialout"
   ];
 
   services.logind.settings.Login = {
