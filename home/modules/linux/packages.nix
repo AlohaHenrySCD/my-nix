@@ -5,6 +5,10 @@
 }:
 {
   home.packages = with pkgs; [
+    usbutils
+    tree
+    vesktop
+    wechat
     chromium
     netease-cloud-music-gtk
     halloy

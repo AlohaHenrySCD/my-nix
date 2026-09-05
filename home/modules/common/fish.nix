@@ -21,10 +21,10 @@
         mkdir -p -- $argv[1]
         and cd -- $argv[1]
       '';
-      rm = ''
-        mkdir -p ~/.trash
-        mv -- $argv ~/.trash/
-      '';
+      # rm = ''
+      #   mkdir -p ~/.trash
+      #   mv -- $argv ~/.trash/
+      # '';
       manrg = ''
         man $argv[1] | col -b | rg -C 3 -- $argv[2]
       '';

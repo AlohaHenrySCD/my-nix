@@ -18,6 +18,15 @@
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+    kde-everforest = {
+      url = "github:Serge2702/KDE-Everforest";
+      flake = false;
+    };
     # nirinit = {
     #   url = "github:amaanq/nirinit";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +41,7 @@
       nirimod,
       home-manager,
       nix-darwin,
+      plasma-manager,
       # nirinit,
       # frpc,
       ...
@@ -56,6 +66,10 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
+
+                sharedModules = [
+                  plasma-manager.homeModules.plasma-manager
+                ];
 
                 extraSpecialArgs = {
                   inherit inputs;

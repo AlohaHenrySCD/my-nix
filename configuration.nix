@@ -51,8 +51,6 @@
   # brightness controll
   hardware.brillo.enable = true;
 
-  services.displayManager.sddm.enable = false;
-  services.displayManager.sddm.wayland.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -65,6 +63,8 @@
   services.blueman.enable = true;
 
   services.dbus.enable = true;
+
+  services.tailscale.enable = true;
 
   # services.nirinit = {
   #   enable = true;
@@ -109,15 +109,24 @@
   # ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   programs.niri.enable = true;
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        user = "alohahenry";
-        command = "${config.programs.niri.package}/bin/niri-session";
-      };
+  services.greetd.enable = false;
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager = {
+    defaultSession = "niri";
+    sddm = {
+      enable = true;
+      wayland.enable = true;
     };
   };
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       user = "alohahenry";
+  #       command = "${config.programs.niri.package}/bin/niri-session";
+  #     };
+  #   };
+  # };
   systemd.user.services.niri.enableDefaultPath = false;
 
   programs.clash-verge = {
@@ -126,6 +135,8 @@
     serviceMode = true;
 
   };
+
+  programs.kdeconnect.enable = true;
 
   programs.dconf.enable = true;
 
@@ -253,6 +264,7 @@
     # mesa
     gtk4.dev
     gsettings-desktop-schemas
+    xwayland-satellite
 
     # gaming
     # sbclPackages.frpc
