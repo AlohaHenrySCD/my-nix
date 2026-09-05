@@ -5,6 +5,7 @@
 {
   gtk = {
     enable = true;
+    gtk2.force = true;
     font = {
       name = "Noto Sans";
       package = pkgs.noto-fonts;
