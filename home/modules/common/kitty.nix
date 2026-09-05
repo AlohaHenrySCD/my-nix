@@ -23,7 +23,7 @@
       italic_font = "auto";
       bold_italic_font = "auto";
 
-      hide_window_decorations = "titlebar-only";
+      # hide_window_decorations = "titlebar-only";
       window_padding_width = 10;
       remember_window_size = "yes";
 
