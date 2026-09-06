@@ -253,6 +253,8 @@ layout {
 spawn-at-startup "mako"
 spawn-at-startup "halloy"
 spawn-at-startup "kitty"
+spawn-at-startup "chromium"
+
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
