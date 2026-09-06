@@ -6,20 +6,18 @@
 {
   home.packages = with pkgs; [
     usbutils
+    wechat
     tree
     vesktop
-    wechat
     chromium
     netease-cloud-music-gtk
     halloy
-    qbittorrent
     ncspot
     libreoffice
-    obsidian
     localsend
     glib
-    gtk4
     gcc
+    gtk4
     pavucontrol
     fuzzel
     mako

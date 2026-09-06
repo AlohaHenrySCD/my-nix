@@ -5,9 +5,9 @@
 }:
 {
   home.packages = with pkgs; [
-    # wechat
-    # wechat-uos
     codex
+    qbittorrent
+    obsidian
     ansifilter
     eza
     ripgrep
