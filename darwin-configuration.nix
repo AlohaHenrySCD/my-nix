@@ -47,7 +47,7 @@
 
   system.keyboard = {
     enableKeyMapping = true;
-    remapCapsLockToEscape = true;
+    swapCapsLockAndEscape = true;
   };
 
   security.pam.services.sudo_local = {
@@ -66,7 +66,7 @@
       "wechat"
       "osu"
       "microsoft-office"
-      "neteasemusic"
+      # "neteasemusic"
       "obsidian"
       "clash-verge-rev"
     ];
