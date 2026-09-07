@@ -66,7 +66,7 @@
       "wechat"
       "osu"
       "microsoft-office"
-      "neteasemusic"
+      # "neteasemusic"
       "obsidian"
       "clash-verge-rev"
     ];
