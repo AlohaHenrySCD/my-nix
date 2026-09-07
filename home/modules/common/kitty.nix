@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   xdg.configFile."kitty/Everforest.conf".source = ./Everforest.conf;
   xdg.configFile."kitty/hotkeys-overlay.fish".source = ./hotkeys-overlay.fish;
@@ -12,6 +12,8 @@
         "launch --type=overlay --title=Hotkeys fish -i ~/.config/kitty/hotkeys-overlay.fish";
     };
     settings = {
+      shell = "${pkgs.fish}/bin/fish";
+
       font_size = 13;
       confirm_os_window_close = 0;
       include = "Everforest.conf";

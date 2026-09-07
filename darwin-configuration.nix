@@ -47,7 +47,7 @@
 
   system.keyboard = {
     enableKeyMapping = true;
-    remapCapsLockToEscape = true;
+    swapCapsLockAndEscape = true;
   };
 
   security.pam.services.sudo_local = {
