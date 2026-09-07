@@ -11,6 +11,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    # utm
     asahi-bless
     picocom
   ];
