@@ -61,8 +61,14 @@
 
     casks = [
       "google-chrome"
-      "localsend"
       "obs"
+      "discord"
+      "wechat"
+      "osu"
+      "microsoft-office"
+      "neteasemusic"
+      "obsidian"
+      "clash-verge-rev"
     ];
   };
 

@@ -5,14 +5,12 @@
 }:
 {
   home.packages = with pkgs; [
-    usbutils
     wechat
-    tree
     vesktop
     chromium
     netease-cloud-music-gtk
-    halloy
     ncspot
+    obsidian
     libreoffice
     localsend
     glib

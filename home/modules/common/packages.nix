@@ -5,10 +5,12 @@
 }:
 {
   home.packages = with pkgs; [
+    usbutils
     codex
-    qbittorrent
-    obsidian
+    tree
+    halloy
     ansifilter
+    qbittorrent
     eza
     ripgrep
     jq
