@@ -29,7 +29,8 @@
       window_padding_width = 10;
       remember_window_size = "yes";
 
-      # cursor = "none";
+      cursor_shape = "block";
+      shell_integration = "enabled no-cursor";
       cursor_trail = 1;
       cursor_trail_decay = "0.05 0.4";
       cursor_trail_start_threshold = 0;

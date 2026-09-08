@@ -38,6 +38,8 @@
   };
 
   programs.kitty = {
+    # Compensate for Niri's touchpad scroll-factor 0.2 inside the terminal.
+    settings.touch_scroll_multiplier = 5.0;
     keybindings = {
       "esc" =
         "combine : send_text all \\x1b : launch --type=background ${pkgs.fcitx5}/bin/fcitx5-remote -c";
@@ -100,6 +102,93 @@
 
   xdg.configFile."mako/config".source = ./mako;
   xdg.configFile."fcitx5/config".source = ./fcitx5;
+  xdg.configFile."fcitx5/conf/classicui.conf".text = ''
+    Theme=everforest
+    DarkTheme=everforest
+    UseDarkTheme=False
+    UseAccentColor=False
+  '';
+  xdg.dataFile."fcitx5/themes/everforest/theme.conf".text = ''
+    [Metadata]
+    Name=Everforest
+    Name[zh_CN]=Everforest 深色
+    Version=1
+    Author=Local
+    Description=Everforest dark colors matching Kitty and the status bar
+    ScaleWithDPI=True
+
+    [InputPanel]
+    NormalColor=#d3c6aa
+    HighlightColor=#a7c080
+    HighlightCandidateColor=#2d353b
+    HighlightBackgroundColor=#3d484d
+    PageButtonAlignment=Last Candidate
+
+    [InputPanel/Background]
+    Color=#2d353b
+    BorderColor=#859289
+    BorderWidth=1
+
+    [InputPanel/Background/Margin]
+    Left=1
+    Right=1
+    Top=1
+    Bottom=1
+
+    [InputPanel/ContentMargin]
+    Left=6
+    Right=6
+    Top=6
+    Bottom=6
+
+    [InputPanel/TextMargin]
+    Left=8
+    Right=8
+    Top=5
+    Bottom=5
+
+    [InputPanel/Highlight]
+    Color=#a7c080
+
+    [InputPanel/Highlight/Margin]
+    Left=4
+    Right=4
+    Top=3
+    Bottom=3
+
+    [Menu]
+    NormalColor=#d3c6aa
+    SelectedItemColor=#2d353b
+
+    [Menu/Background]
+    Color=#2d353b
+    BorderColor=#859289
+    BorderWidth=1
+
+    [Menu/Background/Margin]
+    Left=1
+    Right=1
+    Top=1
+    Bottom=1
+
+    [Menu/ContentMargin]
+    Left=4
+    Right=4
+    Top=4
+    Bottom=4
+
+    [Menu/TextMargin]
+    Left=8
+    Right=8
+    Top=5
+    Bottom=5
+
+    [Menu/Highlight]
+    Color=#a7c080
+
+    [Menu/Separator]
+    Color=#475258
+  '';
   xdg.configFile."fcitx5/conf/rime.conf".text = ''
     # Commit the typed pinyin when switching away from Rime.
     SwitchInputMethodBehavior=CommitRawInput

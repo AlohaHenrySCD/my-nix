@@ -4,7 +4,7 @@
     enable = true;
     interactiveShellInit = ''
       set -g fish_greeting "Hello! AlohaHenry"
-      # set fish_cursor_default block
+      set -g fish_cursor_default block
       abbr --add add --set-cursor='%' 'nix shell nixpkgs#%'
     '';
     shellAbbrs = {

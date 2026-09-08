@@ -5,7 +5,12 @@
 }:
 let
   windowStatus = pkgs.writeShellScript "niri-window-status" ''
-    export PATH=${pkgs.lib.makeBinPath [ pkgs.niri pkgs.i3status-rust ]}:"$PATH"
+    export PATH=${
+      pkgs.lib.makeBinPath [
+        pkgs.niri
+        pkgs.i3status-rust
+      ]
+    }:"$PATH"
     exec ${pkgs.python3}/bin/python3 ${./niri-window-status.py} "$@"
   '';
 in
@@ -65,7 +70,7 @@ in
             block = "battery";
             format = "$icon $percentage $time";
             full_format = "$icon";
-            interval = 3;
+            interval = 1;
           }
           {
             block = "net";

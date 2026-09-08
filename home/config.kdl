@@ -259,7 +259,9 @@ spawn-at-startup "chromium"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
-hotkey-overlay 
+hotkey-overlay {
+    skip-at-startup
+}
 
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.

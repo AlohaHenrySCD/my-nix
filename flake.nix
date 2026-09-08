@@ -11,7 +11,11 @@
       url = "github:srinivasr/nirimod";
     };
     nixos-apple-silicon = {
-      url = "github:tpwrules/nixos-apple-silicon";
+      # Pin Asahi (kernel 7.1.12); change this commit only for an intentional upgrade.
+      # Then run: nix flake update nixos-apple-silicon
+      url = "github:tpwrules/nixos-apple-silicon/fb602d1f8c6d83dd652fecc3f468328f8864f0c1";
+      # To unpin, comment out the URL above and uncomment this one:
+      # url = "github:tpwrules/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-darwin = {

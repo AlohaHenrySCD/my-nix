@@ -9,7 +9,6 @@ import subprocess
 import sys
 import threading
 import time
-import unicodedata
 
 
 # Nerd Font glyphs, rendered by the bar's existing font.
@@ -42,20 +41,10 @@ TERMINALS = {"kitty", "alacritty", "org.wezfurlong.wezterm"}
 LOCAL_HOST = socket.gethostname().split(".", 1)[0].lower()
 
 
-def compact_text(text, width=26):
-    """Bound the label width even when titles contain wide CJK characters."""
+def compact_text(text, limit=10):
+    """Limit detail text to ten characters, including the ellipsis."""
     text = " ".join(text.split())
-    result, used = [], 0
-    for char in text:
-        size = 2 if unicodedata.east_asian_width(char) in "WF" else 1
-        if used + size > width:
-            while result and used > width - 1:
-                removed = result.pop()
-                used -= 2 if unicodedata.east_asian_width(removed) in "WF" else 1
-            return "".join(result) + "…"
-        result.append(char)
-        used += size
-    return "".join(result)
+    return text if len(text) <= limit else text[:limit - 1] + "…"
 
 
 def focused_context(app, title):
