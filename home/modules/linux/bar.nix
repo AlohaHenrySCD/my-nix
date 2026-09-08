@@ -69,6 +69,9 @@ in
           }
           {
             block = "net";
+            # Read Wi-Fi strength even when a proxy/VPN owns the default route.
+            # Matches wld0 on Asahi and predictable wl* names on other hosts.
+            device = "^wl.*$";
             format = "$icon ";
           }
           {
