@@ -100,6 +100,10 @@
 
   xdg.configFile."mako/config".source = ./mako;
   xdg.configFile."fcitx5/config".source = ./fcitx5;
+  xdg.configFile."fcitx5/conf/rime.conf".text = ''
+    # Commit the typed pinyin when switching away from Rime.
+    SwitchInputMethodBehavior=CommitRawInput
+  '';
 
   home.pointerCursor = {
     enable = true;
