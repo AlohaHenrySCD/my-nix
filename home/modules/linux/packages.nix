@@ -7,7 +7,6 @@
   home.packages = with pkgs; [
     qemu
     wechat
-    wechat-uos
     vesktop
     chromium
     netease-cloud-music-gtk
