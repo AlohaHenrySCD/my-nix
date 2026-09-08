@@ -2,11 +2,80 @@
 
 import json
 import queue
+import re
 import signal
+import socket
 import subprocess
 import sys
 import threading
 import time
+import unicodedata
+
+
+# Nerd Font glyphs, rendered by the bar's existing font.
+APP_ICONS = {
+    "kitty": "\uf120",
+    "alacritty": "\uf120",
+    "org.wezfurlong.wezterm": "\uf120",
+    "chromium-browser": "\uf268",
+    "chromium": "\uf268",
+    "google-chrome": "\uf268",
+    "firefox": "\uf269",
+    "org.mozilla.firefox": "\uf269",
+    "code": "\ue70c",
+    "code-oss": "\ue70c",
+    "vesktop": "\uf392",
+    "discord": "\uf392",
+    "dev.vencord.vesktop": "\uf392",
+    "md.obsidian": "\uf249",
+    "obsidian": "\uf249",
+    ".virt-manager-wrapped": "\uf108",
+    "virt-manager": "\uf108",
+    "kazumi": "\uf144",
+    "halloy": "\uf086",
+    "org.kde.dolphin": "\uf07b",
+    "org.gnome.nautilus": "\uf07b",
+}
+
+
+TERMINALS = {"kitty", "alacritty", "org.wezfurlong.wezterm"}
+LOCAL_HOST = socket.gethostname().split(".", 1)[0].lower()
+
+
+def compact_text(text, width=26):
+    """Bound the label width even when titles contain wide CJK characters."""
+    text = " ".join(text.split())
+    result, used = [], 0
+    for char in text:
+        size = 2 if unicodedata.east_asian_width(char) in "WF" else 1
+        if used + size > width:
+            while result and used > width - 1:
+                removed = result.pop()
+                used -= 2 if unicodedata.east_asian_width(removed) in "WF" else 1
+            return "".join(result) + "…"
+        result.append(char)
+        used += size
+    return "".join(result)
+
+
+def focused_context(app, title):
+    title = " ".join((title or "").split())
+    if app in TERMINALS:
+        # Fish's remote-shell title starts with [hostname]. Other shells often
+        # use user@hostname:path. These are title hints, not a process probe.
+        remote = re.match(r"^(?:\[([^\]]+)\]|[^\s@]+@([^\s:]+):)(.*)$", title)
+        if remote:
+            host = remote[1] or remote[2]
+            if host.split(".", 1)[0].lower() not in {LOCAL_HOST, "localhost"}:
+                title = f"远程 {host} {remote[3].strip()}"
+        # An explicit ssh command in the title is already useful as-is.
+        return compact_text(title)
+    for suffix in (" - Chromium", " - Google Chrome", " — Mozilla Firefox",
+                   " - Mozilla Firefox", " - Visual Studio Code"):
+        if title.endswith(suffix):
+            title = title[:-len(suffix)]
+            break
+    return compact_text(title)
 
 
 def window_blocks(windows, workspaces):
@@ -19,17 +88,17 @@ def window_blocks(windows, workspaces):
         w["id"],
     ))
     blocks = []
-    aliases = {"chromium-browser": "Chromium", ".virt-manager-wrapped": "VM Manager"}
     for window in visible:
-        app = window.get("app_id") or window.get("title") or "Window"
-        name = aliases.get(app, app.rsplit(".", 1)[-1])
-        name = " ".join(name.split()) or "Window"
+        app = window.get("app_id") or ""
+        name = app.rsplit(".", 1)[-1] or window.get("title") or "Window"
+        label = APP_ICONS.get(app.lower(), (" ".join(name.split()) or "Window")[:3])
         focused = window.get("is_focused", False)
+        context = focused_context(app.lower(), window.get("title")) if focused else ""
         blocks.append({
             "name": "niri_windows",
             "instance": str(window["id"]),
-            "full_text": " " + (name if len(name) <= 12 else name[:11] + "…") + " ",
-            "short_text": " " + name[:3] + " ",
+            "full_text": " " + label + (" " + context if context else "") + " ",
+            "short_text": " " + label + " ",
             "color": "#3c4841" if focused else "#d3c6aa",
             "background": "#a7c080" if focused else "#3c4841",
             "separator": False,
