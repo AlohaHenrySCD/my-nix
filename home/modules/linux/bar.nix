@@ -1,16 +1,26 @@
 {
   config,
+  pkgs,
   ...
 }:
+let
+  windowStatus = pkgs.writeShellScript "niri-window-status" ''
+    export PATH=${pkgs.lib.makeBinPath [ pkgs.niri pkgs.i3status-rust ]}:"$PATH"
+    exec ${pkgs.python3}/bin/python3 ${./niri-window-status.py} "$@"
+  '';
+in
 {
   programs.i3bar-river = {
     enable = true;
+    package = pkgs.i3bar-river.overrideAttrs (old: {
+      patches = (old.patches or [ ]) ++ [ ./i3bar-left-windows.patch ];
+    });
     settings = {
-      font = "JetBriansMono Nerd Font Bold 15";
+      font = "JetBrainsMono Nerd Font Bold 15";
       height = 22;
       tags_padding = 25;
       separator_width = 1;
-      command = "i3status-rs ${config.xdg.configHome}/i3status-rust/config-default.toml";
+      command = "${windowStatus} ${config.xdg.configHome}/i3status-rust/config-default.toml";
       background = "#3C4841FF";
       color = "#d3c6aaff";
       separator = "#83c092ff";
