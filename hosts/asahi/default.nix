@@ -27,8 +27,12 @@
     LABEL="not_m1n1"
   '';
 
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
   users.users.alohahenry.extraGroups = [
     "dialout"
+    "libvirtd"
   ];
 
   services.logind.settings.Login = {
