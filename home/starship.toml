@@ -5,7 +5,15 @@ $hostname\
 $directory\
 $git_branch\
 $git_state\
-$git_status
+$git_status\
+$package\
+$python\
+$conda\
+$pixi\
+$nodejs\
+$rust\
+$golang\
+$nix_shell
 $character"""
 
 # right_format = """
@@ -53,6 +61,9 @@ symbol = " "
 
 [conda]
 symbol = " "
+format = '[$symbol$environment]($style) '
+style = 'fg:green'
+ignore_base = false
 
 [container]
 symbol = " "
@@ -163,12 +174,18 @@ symbol = "󰛳 "
 symbol = " "
 
 [nix_shell]
-disable = false
-format = "[$symbol$state]($style) "
+disabled = false
+format = '[$symbol$state( \($name\))]($style) '
 symbol = " "
+style = 'fg:blue'
+pure_msg = 'nix:pure'
+impure_msg = 'nix:impure'
+unknown_msg = 'nix:shell'
 
 [nodejs]
 symbol = " "
+format = '[$symbol$version]($style) '
+style = 'fg:green'
 
 [ocaml]
 symbol = " "
@@ -244,6 +261,9 @@ Zorin = " "
 
 [package]
 symbol = "󰏗 "
+format = '[$symbol$version]($style) '
+style = 'fg:yellow'
+display_private = true
 
 [perl]
 symbol = " "
@@ -265,6 +285,8 @@ symbol = " "
 
 [python]
 symbol = " "
+format = '[$symbol${version}( \($virtualenv\))]($style) '
+style = 'fg:yellow'
 
 [raku]
 symbol = "󱖊 "
@@ -280,6 +302,8 @@ symbol = " "
 
 [rust]
 symbol = "󱘗 "
+format = '[$symbol$version]($style) '
+style = 'fg:orange'
 
 [scala]
 symbol = " "
@@ -337,6 +361,8 @@ ssh_symbol = " "
 
 [directory]
 style = "fg:orange"
+repo_root_style = 'bold fg:orange'
+repo_root_format = '[ $before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) '
 read_only_style = "fg:orange"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -381,4 +407,3 @@ grey2 = "#9da9a0"
 statusline1 = "#a7c080"
 statusline2 = "#d3c6aa"
 statusline3 = "#e67e80"
-
