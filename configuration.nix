@@ -86,6 +86,10 @@
     enable = true;
     keyboards = {
       default = {
+        ids = [
+          "*"
+          "-1d50:615e" # pskeeb5 uses its own ZMK keymap.
+        ];
         settings = {
           main = {
             capslock = "esc";

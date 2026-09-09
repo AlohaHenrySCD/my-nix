@@ -398,40 +398,40 @@ binds {
 
     Mod+Q repeat=false { close-window; }
 
-    Mod+J     { focus-column-left; }
-    // Mod+K     { focus-window-down; }
-    // Mod+L     { focus-window-up; }
-    Mod+Semicolon { focus-column-right; }
+    Mod+H     { focus-column-left; }
+    // Mod+J     { focus-window-down; }
+    // Mod+K     { focus-window-up; }
+    Mod+L { focus-column-right; }
 
-    Mod+Ctrl+J     { move-column-left; }
-    // Mod+Ctrl+K     { move-window-down; }
-    // Mod+Ctrl+L     { move-window-up; }
-    Mod+Ctrl+Semicolon    { move-column-right; }
+    Mod+Ctrl+H     { move-column-left; }
+    // Mod+Ctrl+J     { move-window-down; }
+    // Mod+Ctrl+K     { move-window-up; }
+    Mod+Ctrl+L    { move-column-right; }
 
     // the first or last window in a column.
-    Mod+K     { focus-window-or-workspace-down; }
-    Mod+L     { focus-window-or-workspace-up; }
-    Mod+Ctrl+K     { move-window-down-or-to-workspace-down; }
-    Mod+Ctrl+L     { move-window-up-or-to-workspace-up; }
+    Mod+J     { focus-window-or-workspace-down; }
+    Mod+K     { focus-window-or-workspace-up; }
+    Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
+    Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
     Mod+Ctrl+Home { move-column-to-first; }
     Mod+Ctrl+End  { move-column-to-last; }
 
-    Mod+Shift+J     { focus-monitor-left; }
-    Mod+Shift+K     { focus-monitor-down; }
-    Mod+Shift+L     { focus-monitor-up; }
-    Mod+Shift+Semicolon     { focus-monitor-right; }
+    Mod+Shift+H     { focus-monitor-left; }
+    Mod+Shift+J     { focus-monitor-down; }
+    Mod+Shift+K     { focus-monitor-up; }
+    Mod+Shift+L     { focus-monitor-right; }
 
-    Mod+Shift+Ctrl+J     { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+K     { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+L     { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+Semicolon     { move-column-to-monitor-right; }
-    // Mod+Shift+Ctrl+J     { move-column-to-monitor-left; }
-    // Mod+Shift+Ctrl+K     { move-column-to-monitor-down; }
-    // Mod+Shift+Ctrl+L     { move-column-to-monitor-up; }
-    // Mod+Shift+Ctrl+Semicolon     { move-column-to-monitor-right; }
+    Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+    // Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    // Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+    // Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+    // Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }

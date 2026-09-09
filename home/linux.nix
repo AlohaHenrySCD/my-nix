@@ -202,7 +202,7 @@
     # name = "Bibata-Modern-Ice";
     name = "everforest-cursors";
     # name = "phinger-cursors-light";
-    size = 24;
+    size = 28;
 
     gtk.enable = true;
   };

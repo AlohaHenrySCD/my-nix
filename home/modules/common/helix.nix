@@ -34,22 +34,12 @@
       };
       keys.normal = {
         w = "rotate_view";
-        C-j = "jump_view_left";
-        C-k = "jump_view_down";
-        C-l = "jump_view_up";
-        "C-;" = "jump_view_right";
-        j = "move_char_left";
-        k = "move_line_down";
-        l = "move_line_up";
-        ";" = "move_char_right";
+        C-h = "jump_view_left";
+        C-j = "jump_view_down";
+        C-k = "jump_view_up";
+        C-l = "jump_view_right";
         C-q = ":wq";
         C-Q = ":q!";
-      };
-      keys.select = {
-        j = "extend_char_left";
-        k = "extend_line_down";
-        l = "extend_line_up";
-        ";" = "extend_char_right";
       };
 
     };
