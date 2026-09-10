@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
   ...
@@ -29,6 +30,30 @@
 
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
+
+  # Ensure the default NAT network is available after boot and nixos-rebuild.
+  systemd.services.libvirt-default-network = {
+    description = "Start the default libvirt network";
+    wantedBy = [ "multi-user.target" ];
+    requires = [ "libvirtd.service" ];
+    after = [ "libvirtd.service" ];
+    partOf = [ "libvirtd.service" ];
+    path = [
+      config.virtualisation.libvirtd.package
+      pkgs.gnugrep
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      virsh --connect qemu:///system net-autostart default
+      active_networks=$(virsh --connect qemu:///system net-list --name)
+      if ! grep -Fxq default <<< "$active_networks"; then
+        virsh --connect qemu:///system net-start default
+      fi
+    '';
+  };
 
   users.users.alohahenry.extraGroups = [
     "dialout"
