@@ -1,4 +1,6 @@
 {
+  config,
+  lib,
   pkgs,
   ...
 }:
@@ -25,7 +27,12 @@
 
   xdg.configFile."tlrc/config/toml".source = ./tlrc.toml;
 
-  xdg.configFile."euporie/config.json".source = ./euporie.json;
+  # Euporie writes settings and recent files back to this file. Keep a writable
+  # copy and reset it to the declarative template on each activation.
+  home.activation.euporieConfig = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    run ${pkgs.coreutils}/bin/mkdir -p ${lib.escapeShellArg "${config.xdg.configHome}/euporie"}
+    run ${pkgs.coreutils}/bin/install -m 600 ${./euporie.json} ${lib.escapeShellArg "${config.xdg.configHome}/euporie/config.json"}
+  '';
 
   programs.zoxide = {
     enable = true;

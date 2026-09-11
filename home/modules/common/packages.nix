@@ -31,7 +31,7 @@
     (lib.lowPrio jdk8)
 
     python3
-    euporie
+    # euporie # python pack jypyter tui
     uv
     black
     rustc

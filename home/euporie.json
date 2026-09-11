@@ -1,12 +1,9 @@
 {
   "notebook": {
-    "recent_files": [
-      "/home/alohahenry/dev/cv/assesment01.ipynb"
-    ],
     "edit_mode": "vi",
     "enable_language_servers": true,
     "line_numbers": true,
-    "keybindings": {
+    "key_bindings": {
       "euporie.notebook.tabs.notebook:Notebook": {
         "select-previous-cell": "l",
         "select-next-cell": [
@@ -19,7 +16,8 @@
           "K"
         ],
         "edit-previous-cell-vi": "l",
-        "edit-next-cell-vi": "k"
+        "edit-next-cell-vi": "k",
+        "notebook-toggle-line-numbers": "j"
       },
       "euporie.core.key_binding.bindings.micro:EditMode": {},
       "euporie.core.widgets.display:DisplayControl": {
