@@ -68,6 +68,8 @@ in
           }
           {
             block = "battery";
+            # UPower normalizes the signed discharge power reported by macsmc.
+            driver = "upower";
             format = "$icon $percentage $time";
             full_format = "$icon";
             interval = 1;

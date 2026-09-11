@@ -76,9 +76,6 @@
 
   boot = {
     # Opt in to experimental PMP support only on this M1 Pro MacBook (J314s).
-    # The macro must precede the SoC includes: it enables the PMP/report nodes
-    # and their power-domain links together. The Asahi kernel includes drivers.
-    # https://asahilinux.org/2026/04/progress-report-7-0/
     kernelPatches = [
       {
         name = "asahi-j314s-enable-pmp";

@@ -25,6 +25,8 @@
 
   xdg.configFile."tlrc/config/toml".source = ./tlrc.toml;
 
+  xdg.configFile."euporie/config.json".source = ./euporie.json;
+
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;

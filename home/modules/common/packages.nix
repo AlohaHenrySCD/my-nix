@@ -31,6 +31,7 @@
     (lib.lowPrio jdk8)
 
     python3
+    euporie
     uv
     black
     rustc
