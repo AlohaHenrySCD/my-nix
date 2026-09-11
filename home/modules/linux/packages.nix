@@ -8,7 +8,15 @@
     kdePackages.kdenlive
     kazumi
     qemu
-    wechat
+    (symlinkJoin {
+      name = "wechat-scaled";
+      paths = [ wechat ];
+      nativeBuildInputs = [ makeWrapper ];
+      postBuild = ''
+        # Match the built-in display's 2x scale for WeChat's bundled Qt.
+        wrapProgram "$out/bin/wechat" --set-default QT_SCALE_FACTOR 2
+      '';
+    })
     vesktop
     chromium
     netease-cloud-music-gtk

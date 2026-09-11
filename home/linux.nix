@@ -12,6 +12,10 @@
 
   home.homeDirectory = "/home/alohahenry";
 
+  home.sessionVariables = {
+    "QT_IM_MODULE" = "fcitx";
+  };
+
   programs.obs-studio = {
     enable = true;
   };
