@@ -57,6 +57,9 @@
     shellAbbrs = {
       nix-clean = "nix-collect-garbage && sudo nix-collect-garbage && sudo journalctl --vacuum-size=300M";
     };
+    functions = {
+      gbd = "git add . && git commit --message $argv[1] && git push && sudo nixos-rebuild switch --impure --flake /etc/nixos#asahi ";
+    };
   };
 
   i18n.inputMethod = {
