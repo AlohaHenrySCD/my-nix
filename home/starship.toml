@@ -285,7 +285,7 @@ symbol = " "
 
 [python]
 symbol = " "
-format = '[$symbol${version}( \($virtualenv\))]($style) '
+format = '[$symbol( \($virtualenv\))]($style) '
 style = 'fg:yellow'
 
 [raku]
@@ -302,8 +302,6 @@ symbol = " "
 
 [rust]
 symbol = "󱘗 "
-format = '[$symbol$version]($style) '
-style = 'fg:orange'
 
 [scala]
 symbol = " "
