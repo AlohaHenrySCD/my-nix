@@ -24,6 +24,7 @@
     hugo
     lazygit
     btop
+    fd
 
     pkg-config
 
