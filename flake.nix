@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    # Keep the kernel toolchain independent of routine system package updates.
+    nixpkgs-kernel.url = "github:nixos/nixpkgs/8ce4ef6cb6f871616146b9fe26d2a5ae594e94fe";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,6 +13,7 @@
       url = "github:srinivasr/nirimod";
     };
     nixos-apple-silicon = {
+      # Update this and nixpkgs-kernel only when intentionally rebuilding the kernel.
       url = "github:tpwrules/nixos-apple-silicon/fb602d1f8c6d83dd652fecc3f468328f8864f0c1";
       # url = "github:tpwrules/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
