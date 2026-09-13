@@ -1,6 +1,6 @@
 {
   "notebook": {
-    "edit_mode": "vi",
+    "edit_mode": "helix",
     "enable_language_servers": true,
     "line_numbers": true,
     "key_bindings": {
